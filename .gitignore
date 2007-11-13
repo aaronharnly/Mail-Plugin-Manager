@@ -1,0 +1,11 @@
+# Project-specific
+*.bak
+# Xcode-specific
+/build
+*.mode1v3
+*.pbxuser
+
+# Mac OS X-specific
+.DS_Store
+
+# general
