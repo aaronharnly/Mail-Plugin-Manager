@@ -45,23 +45,24 @@
 	}
 }
 
--(IBAction)installFrontmostPluginWindow:(id)sender
-{
-	
-}
-
 
 // --------------------- NSApplication delegate methods -------------------------
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
 	Mailbundle *bundle = [[Mailbundle alloc] initWithPath:filename];
 	PluginWindowController *windowController = [[PluginWindowController alloc] initWithMailbundle:bundle];
-	NSLog(@"Have window controller: %@",windowController);
 	[windowController showWindow:self];
 	[windowController updateDisplay];
 
 	[pluginWindowControllers addObject:windowController];
 	return YES;
+}
+
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
+{
+	for(NSString *filename in filenames) {
+		[self application:sender openFile:filename];
+	}
 }
 
 @end

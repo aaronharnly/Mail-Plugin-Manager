@@ -8,6 +8,9 @@
 
 #import "Installer.h"
 #import "Mailbundle.h"
+#import "Constants.h"
+#import "Utilities.h"
+#import "NSFileManager+TRAdditions.h"
 
 @implementation Installer
 +(NSError *)errorWithMessage:(NSString *)message
@@ -25,7 +28,7 @@
 */
 + (NSString *)findOrCreateBundlesDirectoryForDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
 {
-	return [Installer findOrCreateLibrarySubdirectory:@"Mail/Bundles" forDomain:domain error:error];
+	return [Installer findOrCreateLibrarySubdirectory:BundleSubdirectory forDomain:domain error:error];
 }
 
 /*!
@@ -36,7 +39,7 @@
 */
 + (NSString *)findOrCreateDisabledBundlesDirectoryForDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
 {
-	return [Installer findOrCreateLibrarySubdirectory:@"Mail/Bundles (Disabled)" forDomain:domain error:error];
+	return [Installer findOrCreateLibrarySubdirectory:DisabledBundleSubdirectory forDomain:domain error:error];
 }
 
 
@@ -46,7 +49,7 @@
 	@discussion
 	Authentication will be needed here.
 */
-+ (BOOL)installMailbundle:(Mailbundle *)bundle inDomain:(NSSearchPathDomainMask)domain replacing:(BOOL)replacing error:(NSError **)error
++ (BOOL)installMailbundle:(Mailbundle *)bundle inDomain:(NSSearchPathDomainMask)domain replacing:(BOOL)replacing destination:(NSString **)destination error:(NSError **)error
 {
 	// Step 1: Get our bundles dir
 	NSError *bundleDirError = nil;
@@ -88,7 +91,33 @@
 		NSLog(@"Failed to copy the  bundle.");
 		return NO;
 	}
+	
+	// We did it! Inform the caller of the destination
+	*destination = destinationPath;
 	return YES;
+}
+
++ (BOOL)removeMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error
+{
+	// Step 1: Get our source item
+	if (! [Installer mailbundleExistsAtPath:bundle.path]) {
+		*error = [Installer errorWithMessage:[NSString 
+			stringWithFormat:@"Couldn't find the plugin to remove at: %@", bundle.path]];
+		NSLog(@"Failed, because we couldn't find the plugin to remove.");
+		return NO;
+	}
+
+	// Step 2: Move it to trash
+	NSError *trashError = nil;
+	BOOL success = [[NSFileManager defaultManager] trashPath:bundle.path showAlerts:YES destination:destination error:&trashError];
+	if (success) {
+		return YES;
+	} else {
+		*error = (trashError == nil) ?
+			[Installer errorWithMessage:@"Failed to trash the bundle (for an unknown reason)."]
+			: trashError;
+		return NO;
+	}
 }
 
 // ----------------------- Utilities ----------------------------
@@ -109,7 +138,7 @@
 + (BOOL)mailbundleExistsAtPath:(NSString *)path
 {
 	NSString *extension = [path pathExtension];
-	if (! [extension isEqualToString:@"mailbundle"]) {
+	if (! [extension isEqualToString:MailbundleExtension]) {
 		NSLog(@"Doesn't appear to be a mailbundle: '%@'",path);
 		return NO;
 	}
@@ -172,47 +201,41 @@
 */
 + (NSString *)findOrCreateLibrarySubdirectory:(NSString *)subpath forDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
 {
-	// Step 1: Get the appropriate Library directory
-	NSArray *installationPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, domain, YES);
-
-	if ([installationPaths count] > 0) {
-		NSString *libraryPath = [installationPaths objectAtIndex:0];
-		NSLog(@"Library path: %@", libraryPath);
-		
-		// Step 2: Get the Mail/Bundles subdirectory.
-		NSString *fullpath = [libraryPath stringByAppendingPathComponent:subpath];
-		NSLog(@"Subpath: %@", fullpath);
-		
-		// Step 3: Create the bundles dir if necessary
-		NSFileManager *fileManager = [NSFileManager defaultManager];
-		BOOL isDirectory = NO;
-		if ([fileManager fileExistsAtPath:fullpath isDirectory:&isDirectory]) {
-			if (isDirectory) {
-				NSLog(@"Found an existing directory at %@", fullpath);
-				return fullpath;
-			} else {
-				*error = [Installer errorWithMessage:
-					[NSString stringWithFormat:@"Failed to create the subdirectory '%@', because there's an existing file there.",fullpath]];
-				NSLog(@"Failed, because there's a *file* (rather than a directory) at %@",fullpath);
-				return nil;			
-			}
-		} else {
-			NSLog(@"No directory at %@, so we'll make one", fullpath);
-			if ([fileManager createDirectoryAtPath:fullpath attributes:nil]) {
-				NSLog(@"Successfully created.");
-				return fullpath;
-			} else {
-				NSLog(@"Failed, because we couldn't create the subdirectory.");
-				*error = [Installer errorWithMessage:
-					[NSString stringWithFormat:@"Failed to create the subdirectory '%@' for an unknown reason. Check permissions?",fullpath]];
-				return nil;
-			}
-		}		
-	} else {
+	// Step 1: Get the subdirectory path
+	NSString *fullpath = [Utilities librarySubdirectoryPath:subpath inDomain:domain];
+	NSLog(@"Subpath: %@", fullpath);
+	
+	if (fullpath == nil) {
 		NSLog(@"Failed, because we didn't get an appropriate Library directory.");
 		*error = [Installer errorWithMessage:@"Failed, because we didn't get an appropriate Library directory."];
 		return nil;
-	}	
+	}
+
+	// Step 2: Create the dir if necessary
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	BOOL isDirectory = NO;
+	if ([fileManager fileExistsAtPath:fullpath isDirectory:&isDirectory]) {
+		if (isDirectory) {
+			NSLog(@"Found an existing directory at %@", fullpath);
+			return fullpath;
+		} else {
+			*error = [Installer errorWithMessage:
+				[NSString stringWithFormat:@"Failed to create the subdirectory '%@', because there's an existing file there.",fullpath]];
+			NSLog(@"Failed, because there's a *file* (rather than a directory) at %@",fullpath);
+			return nil;			
+		}
+	} else {
+		NSLog(@"No directory at %@, so we'll make one", fullpath);
+		if ([fileManager createDirectoryAtPath:fullpath attributes:nil]) {
+			NSLog(@"Successfully created.");
+			return fullpath;
+		} else {
+			NSLog(@"Failed, because we couldn't create the subdirectory.");
+			*error = [Installer errorWithMessage:
+				[NSString stringWithFormat:@"Failed to create the subdirectory '%@' for an unknown reason. Check permissions?",fullpath]];
+			return nil;
+		}
+	}
 }
 
 

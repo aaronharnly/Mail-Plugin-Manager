@@ -10,24 +10,28 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		9338DFCA0CE8EA2400CAEC13 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 9338DFC40CE8EA2400CAEC13 /* delete.png */; };
-		9338DFCB0CE8EA2400CAEC13 /* find.png in Resources */ = {isa = PBXBuildFile; fileRef = 9338DFC50CE8EA2400CAEC13 /* find.png */; };
-		9338DFCC0CE8EA2400CAEC13 /* Pause.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 9338DFC60CE8EA2400CAEC13 /* Pause.tiff */; };
-		9338DFCD0CE8EA2400CAEC13 /* Play.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 9338DFC70CE8EA2400CAEC13 /* Play.tiff */; };
-		9338DFCE0CE8EA2400CAEC13 /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 9338DFC80CE8EA2400CAEC13 /* reload.png */; };
-		9338DFCF0CE8EA2400CAEC13 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 9338DFC90CE8EA2400CAEC13 /* stop.png */; };
 		9338DFD30CE8ECF200CAEC13 /* PluginLibraryWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338DFD20CE8ECF200CAEC13 /* PluginLibraryWindowController.m */; };
 		9338DFD60CE8EF9000CAEC13 /* MailbundleEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338DFD50CE8EF9000CAEC13 /* MailbundleEnabler.m */; };
 		9338E0790CE9128400CAEC13 /* MailbundleOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E0780CE9128400CAEC13 /* MailbundleOperations.m */; };
-		9338E15B0CEA06D400CAEC13 /* MailPluginManager.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9338E15A0CEA06D400CAEC13 /* MailPluginManager.icns */; };
-		9338E15D0CEA06D900CAEC13 /* Mailbundle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9338E15C0CEA06D900CAEC13 /* Mailbundle.icns */; };
 		9338E2600CEA4E6400CAEC13 /* TransparentImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E25F0CEA4E6400CAEC13 /* TransparentImageView.m */; };
+		9338E2960CEA5F4B00CAEC13 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E2950CEA5F4B00CAEC13 /* Constants.m */; };
+		9338E3430CEA6A6700CAEC13 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E3420CEA6A6700CAEC13 /* Utilities.m */; };
 		937386780CE52186007EFB20 /* MailPluginManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386770CE52186007EFB20 /* MailPluginManagerController.m */; };
 		9373867C0CE521C8007EFB20 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9373867A0CE521C8007EFB20 /* MainMenu.xib */; };
 		9373867F0CE52255007EFB20 /* PluginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9373867E0CE52255007EFB20 /* PluginWindow.xib */; };
 		937386860CE5232C007EFB20 /* Mailbundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386850CE5232C007EFB20 /* Mailbundle.m */; };
 		9373868A0CE52354007EFB20 /* Installer.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386890CE52354007EFB20 /* Installer.m */; };
 		937386990CE523B7007EFB20 /* PluginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386980CE523B7007EFB20 /* PluginWindowController.m */; };
+		93D0FDF40CEB75D5007705DB /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDE80CEB75D5007705DB /* delete.png */; };
+		93D0FDF50CEB75D5007705DB /* find.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDE90CEB75D5007705DB /* find.png */; };
+		93D0FDF60CEB75D5007705DB /* Mailbundle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDEA0CEB75D5007705DB /* Mailbundle.icns */; };
+		93D0FDF90CEB75D5007705DB /* MailPluginManager.icns in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDED0CEB75D5007705DB /* MailPluginManager.icns */; };
+		93D0FDFC0CEB75D5007705DB /* Pause.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDF00CEB75D5007705DB /* Pause.tiff */; };
+		93D0FDFD0CEB75D5007705DB /* Play.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDF10CEB75D5007705DB /* Play.tiff */; };
+		93D0FDFE0CEB75D5007705DB /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDF20CEB75D5007705DB /* reload.png */; };
+		93D0FDFF0CEB75D5007705DB /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDF30CEB75D5007705DB /* stop.png */; };
+		93D0FE2E0CEB8898007705DB /* NSFileManager+TRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D0FE2D0CEB8898007705DB /* NSFileManager+TRAdditions.m */; };
+		93D0FE860CEB91E5007705DB /* NSString+TRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D0FE850CEB91E5007705DB /* NSString+TRAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,22 +44,19 @@
 		32CA4F630368D1EE00C91783 /* MailPluginManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailPluginManager_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MailPluginManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MailPluginManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9338DFC40CE8EA2400CAEC13 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
-		9338DFC50CE8EA2400CAEC13 /* find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = find.png; sourceTree = "<group>"; };
-		9338DFC60CE8EA2400CAEC13 /* Pause.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Pause.tiff; sourceTree = "<group>"; };
-		9338DFC70CE8EA2400CAEC13 /* Play.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Play.tiff; sourceTree = "<group>"; };
-		9338DFC80CE8EA2400CAEC13 /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
-		9338DFC90CE8EA2400CAEC13 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		9338DFD10CE8ECF200CAEC13 /* PluginLibraryWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginLibraryWindowController.h; sourceTree = "<group>"; };
 		9338DFD20CE8ECF200CAEC13 /* PluginLibraryWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginLibraryWindowController.m; sourceTree = "<group>"; };
 		9338DFD40CE8EF9000CAEC13 /* MailbundleEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailbundleEnabler.h; sourceTree = "<group>"; };
 		9338DFD50CE8EF9000CAEC13 /* MailbundleEnabler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailbundleEnabler.m; sourceTree = "<group>"; };
 		9338E0770CE9128400CAEC13 /* MailbundleOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailbundleOperations.h; sourceTree = "<group>"; };
 		9338E0780CE9128400CAEC13 /* MailbundleOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailbundleOperations.m; sourceTree = "<group>"; };
-		9338E15A0CEA06D400CAEC13 /* MailPluginManager.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MailPluginManager.icns; sourceTree = "<group>"; };
-		9338E15C0CEA06D900CAEC13 /* Mailbundle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Mailbundle.icns; sourceTree = "<group>"; };
 		9338E25E0CEA4E6400CAEC13 /* TransparentImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentImageView.h; sourceTree = "<group>"; };
 		9338E25F0CEA4E6400CAEC13 /* TransparentImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentImageView.m; sourceTree = "<group>"; };
+		9338E2940CEA5F4B00CAEC13 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		9338E2950CEA5F4B00CAEC13 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		9338E3410CEA6A6700CAEC13 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		9338E3420CEA6A6700CAEC13 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		9338E38A0CEA7B2300CAEC13 /* InstallationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstallationStatus.h; sourceTree = "<group>"; };
 		937386760CE52186007EFB20 /* MailPluginManagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailPluginManagerController.h; sourceTree = "<group>"; };
 		937386770CE52186007EFB20 /* MailPluginManagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailPluginManagerController.m; sourceTree = "<group>"; };
 		9373867B0CE521C8007EFB20 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -66,6 +67,22 @@
 		937386890CE52354007EFB20 /* Installer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Installer.m; sourceTree = "<group>"; };
 		937386970CE523B7007EFB20 /* PluginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginWindowController.h; sourceTree = "<group>"; };
 		937386980CE523B7007EFB20 /* PluginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginWindowController.m; sourceTree = "<group>"; };
+		93D0FDE80CEB75D5007705DB /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		93D0FDE90CEB75D5007705DB /* find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = find.png; sourceTree = "<group>"; };
+		93D0FDEA0CEB75D5007705DB /* Mailbundle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Mailbundle.icns; sourceTree = "<group>"; };
+		93D0FDEB0CEB75D5007705DB /* Mailbundle.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mailbundle.pxm; sourceTree = "<group>"; };
+		93D0FDEC0CEB75D5007705DB /* Mailbundle.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Mailbundle.tiff; sourceTree = "<group>"; };
+		93D0FDED0CEB75D5007705DB /* MailPluginManager.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MailPluginManager.icns; sourceTree = "<group>"; };
+		93D0FDEE0CEB75D5007705DB /* MailPluginManager.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = MailPluginManager.pxm; sourceTree = "<group>"; };
+		93D0FDEF0CEB75D5007705DB /* MailPluginManager.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MailPluginManager.tiff; sourceTree = "<group>"; };
+		93D0FDF00CEB75D5007705DB /* Pause.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Pause.tiff; sourceTree = "<group>"; };
+		93D0FDF10CEB75D5007705DB /* Play.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Play.tiff; sourceTree = "<group>"; };
+		93D0FDF20CEB75D5007705DB /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
+		93D0FDF30CEB75D5007705DB /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		93D0FE2C0CEB8898007705DB /* NSFileManager+TRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+TRAdditions.h"; sourceTree = "<group>"; };
+		93D0FE2D0CEB8898007705DB /* NSFileManager+TRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+TRAdditions.m"; sourceTree = "<group>"; };
+		93D0FE840CEB91E5007705DB /* NSString+TRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TRAdditions.h"; sourceTree = "<group>"; };
+		93D0FE850CEB91E5007705DB /* NSString+TRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TRAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +138,7 @@
 		29B97314FDCFA39411CA2CEA /* MailPluginManager */ = {
 			isa = PBXGroup;
 			children = (
+				93D0FE2B0CEB886F007705DB /* Categories */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -142,7 +160,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9373869B0CE5268F007EFB20 /* Icons */,
+				93D0FDE70CEB75D5007705DB /* Icons */,
 				9373869A0CE52686007EFB20 /* Nibs */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -173,6 +191,11 @@
 			children = (
 				937386840CE5232C007EFB20 /* Mailbundle.h */,
 				937386850CE5232C007EFB20 /* Mailbundle.m */,
+				9338E2940CEA5F4B00CAEC13 /* Constants.h */,
+				9338E2950CEA5F4B00CAEC13 /* Constants.m */,
+				9338E3410CEA6A6700CAEC13 /* Utilities.h */,
+				9338E3420CEA6A6700CAEC13 /* Utilities.m */,
+				9338E38A0CEA7B2300CAEC13 /* InstallationStatus.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -219,19 +242,34 @@
 			name = Nibs;
 			sourceTree = "<group>";
 		};
-		9373869B0CE5268F007EFB20 /* Icons */ = {
+		93D0FDE70CEB75D5007705DB /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				9338E15C0CEA06D900CAEC13 /* Mailbundle.icns */,
-				9338E15A0CEA06D400CAEC13 /* MailPluginManager.icns */,
-				9338DFC40CE8EA2400CAEC13 /* delete.png */,
-				9338DFC50CE8EA2400CAEC13 /* find.png */,
-				9338DFC60CE8EA2400CAEC13 /* Pause.tiff */,
-				9338DFC70CE8EA2400CAEC13 /* Play.tiff */,
-				9338DFC80CE8EA2400CAEC13 /* reload.png */,
-				9338DFC90CE8EA2400CAEC13 /* stop.png */,
+				93D0FDE80CEB75D5007705DB /* delete.png */,
+				93D0FDE90CEB75D5007705DB /* find.png */,
+				93D0FDEA0CEB75D5007705DB /* Mailbundle.icns */,
+				93D0FDEB0CEB75D5007705DB /* Mailbundle.pxm */,
+				93D0FDEC0CEB75D5007705DB /* Mailbundle.tiff */,
+				93D0FDED0CEB75D5007705DB /* MailPluginManager.icns */,
+				93D0FDEE0CEB75D5007705DB /* MailPluginManager.pxm */,
+				93D0FDEF0CEB75D5007705DB /* MailPluginManager.tiff */,
+				93D0FDF00CEB75D5007705DB /* Pause.tiff */,
+				93D0FDF10CEB75D5007705DB /* Play.tiff */,
+				93D0FDF20CEB75D5007705DB /* reload.png */,
+				93D0FDF30CEB75D5007705DB /* stop.png */,
 			);
-			name = Icons;
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		93D0FE2B0CEB886F007705DB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				93D0FE840CEB91E5007705DB /* NSString+TRAdditions.h */,
+				93D0FE850CEB91E5007705DB /* NSString+TRAdditions.m */,
+				93D0FE2C0CEB8898007705DB /* NSFileManager+TRAdditions.h */,
+				93D0FE2D0CEB8898007705DB /* NSFileManager+TRAdditions.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,14 +318,14 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				9373867C0CE521C8007EFB20 /* MainMenu.xib in Resources */,
 				9373867F0CE52255007EFB20 /* PluginWindow.xib in Resources */,
-				9338DFCA0CE8EA2400CAEC13 /* delete.png in Resources */,
-				9338DFCB0CE8EA2400CAEC13 /* find.png in Resources */,
-				9338DFCC0CE8EA2400CAEC13 /* Pause.tiff in Resources */,
-				9338DFCD0CE8EA2400CAEC13 /* Play.tiff in Resources */,
-				9338DFCE0CE8EA2400CAEC13 /* reload.png in Resources */,
-				9338DFCF0CE8EA2400CAEC13 /* stop.png in Resources */,
-				9338E15B0CEA06D400CAEC13 /* MailPluginManager.icns in Resources */,
-				9338E15D0CEA06D900CAEC13 /* Mailbundle.icns in Resources */,
+				93D0FDF40CEB75D5007705DB /* delete.png in Resources */,
+				93D0FDF50CEB75D5007705DB /* find.png in Resources */,
+				93D0FDF60CEB75D5007705DB /* Mailbundle.icns in Resources */,
+				93D0FDF90CEB75D5007705DB /* MailPluginManager.icns in Resources */,
+				93D0FDFC0CEB75D5007705DB /* Pause.tiff in Resources */,
+				93D0FDFD0CEB75D5007705DB /* Play.tiff in Resources */,
+				93D0FDFE0CEB75D5007705DB /* reload.png in Resources */,
+				93D0FDFF0CEB75D5007705DB /* stop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +345,10 @@
 				9338DFD60CE8EF9000CAEC13 /* MailbundleEnabler.m in Sources */,
 				9338E0790CE9128400CAEC13 /* MailbundleOperations.m in Sources */,
 				9338E2600CEA4E6400CAEC13 /* TransparentImageView.m in Sources */,
+				9338E2960CEA5F4B00CAEC13 /* Constants.m in Sources */,
+				9338E3430CEA6A6700CAEC13 /* Utilities.m in Sources */,
+				93D0FE2E0CEB8898007705DB /* NSFileManager+TRAdditions.m in Sources */,
+				93D0FE860CEB91E5007705DB /* NSString+TRAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

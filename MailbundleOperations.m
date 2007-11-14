@@ -19,8 +19,6 @@
 				forKey:@"ErrorMessage"]];
 }
 
-
-// Get information
 +(NSArray *) getInstalledMailbundles 
 {
 	return [NSArray array];
@@ -31,12 +29,16 @@
 }
 
 // Enable/disable
-+(BOOL) toggleEnabledOrDisabledMailbundle:(Mailbundle *)bundle error:(NSError **)error
-{
-	return NO;
-}
 +(BOOL) enableMailbundle:(Mailbundle *)bundle error:(NSError **)error
 {
+	if (! bundle.installationStatus.installed) {
+		*error = [MailbundleOperations errorWithMessage:@"The plugin is not installed."];
+		return NO;
+	}
+	if (bundle.installationStatus.enabled) {
+		*error = [MailbundleOperations errorWithMessage:@"The plugin is already enabled."];
+		return NO;
+	}
 	return NO;
 }
 +(BOOL) disableMailbundle:(Mailbundle *)bundle error:(NSError **)error
@@ -45,7 +47,7 @@
 }
 
 // Install/remove
-+(BOOL) installMailbundle:(Mailbundle *)bundle inDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
++(BOOL) installMailbundle:(Mailbundle *)bundle inDomain:(NSSearchPathDomainMask)domain destination:(NSString **)destination error:(NSError **)error
 {
 	NSError *enableError = nil;
 	if (! [MailbundleEnabler enableMailbundlesForCurrentVersionError:&enableError] ) {
@@ -55,7 +57,7 @@
 		return NO;
 	}
 	NSError *installError = nil;
-	if (! [Installer installMailbundle:bundle inDomain:domain replacing:YES error:&installError] ) {
+	if (! [Installer installMailbundle:bundle inDomain:domain replacing:YES destination:destination error:&installError] ) {
 		*error = (installError == nil) ?
 			[MailbundleOperations errorWithMessage:@"Copying the mailbundle failed."]
 			: installError;
@@ -63,9 +65,16 @@
 	}
 	return YES;
 }
-+(BOOL) removeMailbundle:(Mailbundle *)bundle error:(NSError **)error
++(BOOL) removeMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error
 {
-	return NO;
+	NSError *removeError = nil;
+	if (! [Installer removeMailbundle:bundle destination:destination error:&removeError] ) {
+		*error = (removeError == nil) ?
+			[MailbundleOperations errorWithMessage:@"Removing the mailbundle failed."]
+			: removeError;
+		return NO;
+	}
+	return YES;
 }
 
 @end

@@ -15,14 +15,34 @@
 	IBOutlet TransparentImageView *iconView;
 	IBOutlet NSTextField *nameField;
 	IBOutlet NSTextField *versionField;
-	IBOutlet NSButton *installButton;
+	IBOutlet NSTextField *descriptionField;
+	IBOutlet NSPathControl *pathBar;
+	IBOutlet NSTextField *installationStatusField;
+	IBOutlet NSTextField *otherCopiesStatusField;
+	IBOutlet NSButton *installOrRemoveButton;
+	IBOutlet NSButton *enableOrDisableButton;
 }
 - (id)initWithMailbundle:(Mailbundle *)bundle;
 
-- (IBAction) installPlugin:(id)sender;
+// manage view
 - (void)updateDisplay;
+- (NSString *)textForName:(NSString *)name installationStatus:(struct InstallationStatus)status;
+- (void)configureButtonsForCurrentInstallationStatus;
 
-- (void) installPluginAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+// manage alerts
+- (void) displayAlertForSuccess:(BOOL)success error:(NSError *)error successMessage:(NSString *)successMessage successInfo:(NSString *)successInfo failureMessage:(NSString *)failureMessage pathToOpen:(NSString *)path;
+- (void) pluginAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+
+// install, remove
+- (IBAction) installOrRemovePlugin:(id)sender;
+- (IBAction) installPlugin:(id)sender;
+- (IBAction) removePlugin:(id)sender;
+
+// enable, disable
+- (IBAction) enableOrDisablePlugin:(id)sender;
+- (IBAction) enablePlugin:(id)sender;
+- (IBAction) disablePlugin:(id)sender;
+
 
 @property Mailbundle *plugin;
 @end

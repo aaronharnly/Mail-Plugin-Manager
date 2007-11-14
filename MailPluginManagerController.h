@@ -15,6 +15,4 @@
 -(IBAction)openDocumentPanel:(id)sender;
 -(void)openDocumentPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo;
 
--(IBAction)installFrontmostPluginWindow:(id)sender;
-
 @end

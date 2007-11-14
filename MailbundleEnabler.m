@@ -7,10 +7,7 @@
 //
 
 #import "MailbundleEnabler.h"
-
-CFStringRef mailIdentifier = CFSTR("com.apple.mail");
-CFStringRef enabledKey = CFSTR("EnableBundles");
-CFStringRef versionKey = CFSTR("BundleCompabilityVersion");
+#import "Constants.h"
 
 @implementation MailbundleEnabler
 +(NSError *)errorWithMessage:(NSString *)message
@@ -55,17 +52,17 @@ CFStringRef versionKey = CFSTR("BundleCompabilityVersion");
 // Enable
 +(BOOL)mailbundlesAreEnabled {
 	Boolean valid = FALSE;
-	Boolean enabled = CFPreferencesGetAppBooleanValue(enabledKey, mailIdentifier, &valid);
+	Boolean enabled = CFPreferencesGetAppBooleanValue((CFStringRef) MailbundlesEnabledKey, (CFStringRef) MailIdentifier, &valid);
 	return (enabled) ? YES : NO;
 }
 +(BOOL)setMailbundlesEnabled:(BOOL)enabled error:(NSError **)error{
 	CFBooleanRef booleanEnabled = (enabled) ? kCFBooleanTrue : kCFBooleanFalse;
-	CFPreferencesSetAppValue(enabledKey, booleanEnabled, mailIdentifier);
-	if (CFPreferencesAppSynchronize(mailIdentifier)) {
+	CFPreferencesSetAppValue((CFStringRef) MailbundlesEnabledKey, booleanEnabled, (CFStringRef) MailIdentifier);
+	if (CFPreferencesAppSynchronize((CFStringRef) MailIdentifier)) {
 		return YES;
 	} else {
 		*error = [MailbundleEnabler errorWithMessage:
-			[NSString stringWithFormat:@"Failed to set the %@ preference.", enabledKey]];
+			[NSString stringWithFormat:@"Failed to set the %@ preference.", MailbundlesEnabledKey]];
 		return NO;
 	}
 }
@@ -73,16 +70,16 @@ CFStringRef versionKey = CFSTR("BundleCompabilityVersion");
 // Compatibility version
 +(NSNumber *)bundleCompatability {
 	Boolean valid = FALSE;
-	CFIndex compat = CFPreferencesGetAppIntegerValue(versionKey, mailIdentifier, &valid);
+	CFIndex compat = CFPreferencesGetAppIntegerValue((CFStringRef) MailbundleVersionKey,(CFStringRef)  MailIdentifier, &valid);
 	return [NSNumber numberWithInt:compat];
 }
 +(BOOL)setBundleCompatability:(NSNumber *)version error:(NSError **)error{
-	CFPreferencesSetAppValue(versionKey, version, mailIdentifier);
-	if (CFPreferencesAppSynchronize(mailIdentifier)) {
+	CFPreferencesSetAppValue((CFStringRef) MailbundleVersionKey, version, (CFStringRef) MailIdentifier);
+	if (CFPreferencesAppSynchronize((CFStringRef) MailIdentifier)) {
 		return YES;
 	} else {
 		*error = [MailbundleEnabler errorWithMessage:
-			[NSString stringWithFormat:@"Failed to set the %@ preference.", versionKey]];
+			[NSString stringWithFormat:@"Failed to set the %@ preference.", MailbundleVersionKey]];
 		return NO;
 	}	
 }

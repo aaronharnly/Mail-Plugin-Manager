@@ -10,5 +10,21 @@
 
 
 @implementation PluginLibraryWindowController
+-(IBAction) refreshListing
+{
+
+}
+-(IBAction) enableOrDisableSelection
+{
+
+}
+-(IBAction) revealSelectionInFinder
+{
+
+}
+-(IBAction) removeSelection
+{
+
+}
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "InstallationStatus.h"
 
 @interface Mailbundle : NSObject {
 	NSString *path;
@@ -16,17 +16,17 @@
 	NSString *version;
 	NSImage *icon;
 	NSBundle *bundle;
+	struct InstallationStatus installationStatus;
 }
 -(id)initWithPath:(NSString *)path;
 
--(BOOL) isInstalled;
--(BOOL) isEnabled;
--(NSSearchPathDomainMask) installedDomain;
+-(struct InstallationStatus) getInstallationStatus;
 
 @property (copy) NSString *path;
-@property (copy) NSString *name;
-@property (copy) NSString *identifier;
-@property (copy) NSString *version;
-@property (copy) NSImage *icon;
-@property NSBundle *bundle;
+@property (readonly) NSString *name;
+@property (readonly) NSString *identifier;
+@property (readonly) NSString *version;
+@property (readonly) NSImage *icon;
+@property (readonly) NSBundle *bundle;
+@property (readonly) struct InstallationStatus installationStatus;
 @end
