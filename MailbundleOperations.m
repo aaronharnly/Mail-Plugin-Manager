@@ -9,7 +9,7 @@
 #import "MailbundleOperations.h"
 #import "Mailbundle.h"
 #import "Installer.h"
-#import "MailbundleEnabler.h"
+#import "MailPreferencesFiddler.h"
 
 @implementation MailbundleOperations
 +(NSError *)errorWithMessage:(NSString *)message
@@ -50,7 +50,7 @@
 +(BOOL) installMailbundle:(Mailbundle *)bundle inDomain:(NSSearchPathDomainMask)domain destination:(NSString **)destination error:(NSError **)error
 {
 	NSError *enableError = nil;
-	if (! [MailbundleEnabler enableMailbundlesForCurrentVersionError:&enableError] ) {
+	if (! [MailPreferencesFiddler enableMailbundlesForCurrentVersionError:&enableError] ) {
 		*error = (enableError == nil) ?
 			[MailbundleOperations errorWithMessage:@"Setting Mail preferences to enable mailbundles failed."]
 			: enableError;	

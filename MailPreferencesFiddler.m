@@ -6,10 +6,10 @@
 //  Copyright 2007 __MyCompanyName__. All rights reserved.
 //
 
-#import "MailbundleEnabler.h"
+#import "MailPreferencesFiddler.h"
 #import "Constants.h"
 
-@implementation MailbundleEnabler
+@implementation MailPreferencesFiddler
 +(NSError *)errorWithMessage:(NSString *)message
 {
 	return [NSError errorWithDomain:@"MailbundleEnabler" code:1 userInfo:[NSDictionary 
@@ -20,9 +20,9 @@
 +(BOOL)enableMailbundlesForCurrentVersionError:(NSError **)error
 {
 	NSError *enableError = nil;
-	if (! [MailbundleEnabler enableMailbundlesForVersion:3 error:&enableError]) {
+	if (! [MailPreferencesFiddler enableMailbundlesForVersion:3 error:&enableError]) {
 		*error = (enableError == nil) ?
-			[MailbundleEnabler errorWithMessage:@"Couldn't enable Mailbundles."]
+			[MailPreferencesFiddler errorWithMessage:@"Couldn't enable Mailbundles."]
 			: enableError;
 		return NO;
 	}
@@ -32,16 +32,16 @@
 +(BOOL)enableMailbundlesForVersion:(int)version error:(NSError **)error
 {
 	NSError *enableError = nil;
-	if (! [MailbundleEnabler setMailbundlesEnabled:YES error:error] ) {
+	if (! [MailPreferencesFiddler setMailbundlesEnabled:YES error:error] ) {
 		*error = (enableError == nil) ?
-			[MailbundleEnabler errorWithMessage:@"Couldn't enable Mailbundles."]
+			[MailPreferencesFiddler errorWithMessage:@"Couldn't enable Mailbundles."]
 			: enableError;	
 		return NO;
 	}
 	NSError *compatabilityError = nil;
-	if (! [MailbundleEnabler setBundleCompatability:[NSNumber numberWithInt:version] error:&compatabilityError] ) {
+	if (! [MailPreferencesFiddler setBundleCompatability:[NSNumber numberWithInt:version] error:&compatabilityError] ) {
 		*error = (compatabilityError == nil) ?
-			[MailbundleEnabler errorWithMessage:@"Couldn't set the Mailbundle compatability level."]
+			[MailPreferencesFiddler errorWithMessage:@"Couldn't set the Mailbundle compatability level."]
 			: compatabilityError;	
 		return NO;
 	}
@@ -61,7 +61,7 @@
 	if (CFPreferencesAppSynchronize((CFStringRef) MailIdentifier)) {
 		return YES;
 	} else {
-		*error = [MailbundleEnabler errorWithMessage:
+		*error = [MailPreferencesFiddler errorWithMessage:
 			[NSString stringWithFormat:@"Failed to set the %@ preference.", MailbundlesEnabledKey]];
 		return NO;
 	}
@@ -78,7 +78,7 @@
 	if (CFPreferencesAppSynchronize((CFStringRef) MailIdentifier)) {
 		return YES;
 	} else {
-		*error = [MailbundleEnabler errorWithMessage:
+		*error = [MailPreferencesFiddler errorWithMessage:
 			[NSString stringWithFormat:@"Failed to set the %@ preference.", MailbundleVersionKey]];
 		return NO;
 	}	

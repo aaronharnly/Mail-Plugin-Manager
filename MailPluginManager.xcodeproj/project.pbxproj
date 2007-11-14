@@ -11,7 +11,7 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		9338DFD30CE8ECF200CAEC13 /* PluginLibraryWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338DFD20CE8ECF200CAEC13 /* PluginLibraryWindowController.m */; };
-		9338DFD60CE8EF9000CAEC13 /* MailbundleEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338DFD50CE8EF9000CAEC13 /* MailbundleEnabler.m */; };
+		9338DFD60CE8EF9000CAEC13 /* MailPreferencesFiddler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338DFD50CE8EF9000CAEC13 /* MailPreferencesFiddler.m */; };
 		9338E0790CE9128400CAEC13 /* MailbundleOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E0780CE9128400CAEC13 /* MailbundleOperations.m */; };
 		9338E2600CEA4E6400CAEC13 /* TransparentImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E25F0CEA4E6400CAEC13 /* TransparentImageView.m */; };
 		9338E2960CEA5F4B00CAEC13 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E2950CEA5F4B00CAEC13 /* Constants.m */; };
@@ -46,8 +46,8 @@
 		8D1107320486CEB800E47090 /* MailPluginManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MailPluginManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9338DFD10CE8ECF200CAEC13 /* PluginLibraryWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginLibraryWindowController.h; sourceTree = "<group>"; };
 		9338DFD20CE8ECF200CAEC13 /* PluginLibraryWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginLibraryWindowController.m; sourceTree = "<group>"; };
-		9338DFD40CE8EF9000CAEC13 /* MailbundleEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailbundleEnabler.h; sourceTree = "<group>"; };
-		9338DFD50CE8EF9000CAEC13 /* MailbundleEnabler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailbundleEnabler.m; sourceTree = "<group>"; };
+		9338DFD40CE8EF9000CAEC13 /* MailPreferencesFiddler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailPreferencesFiddler.h; sourceTree = "<group>"; };
+		9338DFD50CE8EF9000CAEC13 /* MailPreferencesFiddler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailPreferencesFiddler.m; sourceTree = "<group>"; };
 		9338E0770CE9128400CAEC13 /* MailbundleOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailbundleOperations.h; sourceTree = "<group>"; };
 		9338E0780CE9128400CAEC13 /* MailbundleOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailbundleOperations.m; sourceTree = "<group>"; };
 		9338E25E0CEA4E6400CAEC13 /* TransparentImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentImageView.h; sourceTree = "<group>"; };
@@ -214,8 +214,8 @@
 			children = (
 				937386880CE52354007EFB20 /* Installer.h */,
 				937386890CE52354007EFB20 /* Installer.m */,
-				9338DFD40CE8EF9000CAEC13 /* MailbundleEnabler.h */,
-				9338DFD50CE8EF9000CAEC13 /* MailbundleEnabler.m */,
+				9338DFD40CE8EF9000CAEC13 /* MailPreferencesFiddler.h */,
+				9338DFD50CE8EF9000CAEC13 /* MailPreferencesFiddler.m */,
 				9338E0770CE9128400CAEC13 /* MailbundleOperations.h */,
 				9338E0780CE9128400CAEC13 /* MailbundleOperations.m */,
 			);
@@ -342,7 +342,7 @@
 				9373868A0CE52354007EFB20 /* Installer.m in Sources */,
 				937386990CE523B7007EFB20 /* PluginWindowController.m in Sources */,
 				9338DFD30CE8ECF200CAEC13 /* PluginLibraryWindowController.m in Sources */,
-				9338DFD60CE8EF9000CAEC13 /* MailbundleEnabler.m in Sources */,
+				9338DFD60CE8EF9000CAEC13 /* MailPreferencesFiddler.m in Sources */,
 				9338E0790CE9128400CAEC13 /* MailbundleOperations.m in Sources */,
 				9338E2600CEA4E6400CAEC13 /* TransparentImageView.m in Sources */,
 				9338E2960CEA5F4B00CAEC13 /* Constants.m in Sources */,

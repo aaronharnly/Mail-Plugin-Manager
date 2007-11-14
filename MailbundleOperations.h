@@ -20,8 +20,8 @@
 +(NSArray *) getInstalledMailbundlesInDomain:(NSSearchPathDomainMask)domain;
 
 // Enable/disable
-+(BOOL) enableMailbundle:(Mailbundle *)bundle error:(NSError **)error;
-+(BOOL) disableMailbundle:(Mailbundle *)bundle error:(NSError **)error;
++(BOOL) enableMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error;
++(BOOL) disableMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error;
 
 // Install/remove
 +(BOOL) installMailbundle:(Mailbundle *)bundle inDomain:(NSSearchPathDomainMask)domain destination:(NSString **)destination error:(NSError **)error;

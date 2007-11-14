@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MailbundleEnabler : NSObject {
+@interface MailPreferencesFiddler : NSObject {
 
 }
 // All together:
