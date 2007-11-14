@@ -31,19 +31,25 @@
 // Enable/disable
 +(BOOL) enableMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error
 {
-	if (! bundle.installationStatus.installed) {
-		*error = [MailbundleOperations errorWithMessage:@"The plugin is not installed."];
+	NSError *moveError = nil;
+	if (! [Installer enableMailbundle:bundle replacing:YES destination:destination error:&moveError] ) {
+		*error = (moveError == nil) ?
+			[MailbundleOperations errorWithMessage:@"Enabling the mailbundle failed."]
+			: moveError;
 		return NO;
 	}
-	if (bundle.installationStatus.enabled) {
-		*error = [MailbundleOperations errorWithMessage:@"The plugin is already enabled."];
-		return NO;
-	}
-	return NO;
+	return YES;
 }
 +(BOOL) disableMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error
 {
-	return NO;
+	NSError *moveError = nil;
+	if (! [Installer disableMailbundle:bundle replacing:YES destination:destination error:&moveError] ) {
+		*error = (moveError == nil) ?
+			[MailbundleOperations errorWithMessage:@"Enabling the mailbundle failed."]
+			: moveError;
+		return NO;
+	}
+	return YES;
 }
 
 // Install/remove

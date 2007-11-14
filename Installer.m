@@ -19,30 +19,124 @@
 				dictionaryWithObject:message
 				forKey:@"ErrorMessage"]];
 }
-
-/*!
-	@method findOrCreateBundlesDirectoryForDomain:
-	@abstract Kinda like it says. Returns path to the bundles directory on success; nil on failure.
-	@discussion
-	
-*/
-+ (NSString *)findOrCreateBundlesDirectoryForDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
+// Enable/Disable
++(BOOL) enableMailbundle:(Mailbundle *)bundle replacing:(BOOL)replacing destination:(NSString **)destination error:(NSError **)error
 {
-	return [Installer findOrCreateLibrarySubdirectory:BundleSubdirectory forDomain:domain error:error];
+	// Step 0: validate
+	if (! bundle.installationStatus.installed) {
+		*error = [Installer errorWithMessage:@"This plugin isn't installed."];
+		return NO;
+	}
+	if (bundle.installationStatus.enabled) {
+		*error = [Installer errorWithMessage:@"This plugin is already enabled."];
+		return NO;
+	}
+
+	// Step 1: Get our bundles dir
+	NSError *bundleDirError = nil;
+	NSString *bundlesDir = [Installer findOrCreateBundlesDirectoryForDomain:bundle.installationStatus.domain error:&bundleDirError];
+	if (bundlesDir == nil) {
+		*error = (bundleDirError == nil) ?
+			[Installer errorWithMessage:@"Couldn't find or create the Bundles directory."]
+			: bundleDirError;
+		NSLog(@"Failed, because we couldn't find or create the Bundles directory.");
+		return NO;
+	}
+	NSLog(@"Have bundles dir: %@", bundlesDir);
+	
+	// Step 2: Get our source item
+	if (! [Installer mailbundleExistsAtPath:bundle.path]) {
+		*error = [Installer errorWithMessage:[NSString 
+			stringWithFormat:@"Couldn't find the plugin to enable at: %@", bundle.path]];
+		NSLog(@"Failed, because we couldn't find the plugin to enable.");
+		return NO;
+	}	
+	
+	// Step 3: Delete an existing mailbundle, if it's already present & we're replacing
+	NSString *destinationPath = [bundlesDir stringByAppendingPathComponent:[bundle.path lastPathComponent]];
+	NSError *deleteExistingError = nil;
+	if (! [Installer deleteIfReplacing:destinationPath replacing:replacing error:&deleteExistingError]) {
+		*error = (deleteExistingError == nil) ?
+			[Installer errorWithMessage:@"An existing bundle is present that we wouldn't or couldn't remove."]
+			: deleteExistingError;
+		NSLog(@"Failed, because an existing bundle is present that we wouldn't or couldn't remove.");
+		return NO;
+	}
+	
+	// Step 4: Move
+	NSError *moveError = nil;
+	if (! [Installer moveBundleAtPath:bundle.path toPath:destinationPath error:&moveError]) {
+		*error = (moveError == nil) ?
+			[Installer errorWithMessage:@"Failed to move the plugin."]
+			: moveError;
+		NSLog(@"Failed to move the bundle.");
+		return NO;
+	}
+	
+	// We did it! Inform the caller of the destination
+	*destination = destinationPath;
+	return YES;
+}
++(BOOL) disableMailbundle:(Mailbundle *)bundle replacing:(BOOL)replacing destination:(NSString **)destination error:(NSError **)error
+{
+	// Step 0: validate
+	if (! bundle.installationStatus.installed) {
+		*error = [Installer errorWithMessage:@"This plugin isn't installed."];
+		return NO;
+	}
+	if (! bundle.installationStatus.enabled) {
+		*error = [Installer errorWithMessage:@"This plugin is already disabled."];
+		return NO;
+	}
+
+	// Step 1: Get our disabled-bundles dir
+	NSError *bundleDirError = nil;
+	NSString *bundlesDir = [Installer findOrCreateDisabledBundlesDirectoryForDomain:bundle.installationStatus.domain error:&bundleDirError];
+	if (bundlesDir == nil) {
+		*error = (bundleDirError == nil) ?
+			[Installer errorWithMessage:@"Couldn't find or create the Disabled Bundles directory."]
+			: bundleDirError;
+		NSLog(@"Failed, because we couldn't find or create the Disabled Bundles directory.");
+		return NO;
+	}
+	NSLog(@"Have disabled bundles dir: %@", bundlesDir);
+	
+	// Step 2: Get our source item
+	if (! [Installer mailbundleExistsAtPath:bundle.path]) {
+		*error = [Installer errorWithMessage:[NSString 
+			stringWithFormat:@"Couldn't find the plugin to disable at: %@", bundle.path]];
+		NSLog(@"Failed, because we couldn't find the plugin to disable.");
+		return NO;
+	}	
+	
+	// Step 3: Delete an existing mailbundle, if it's already present & we're replacing
+	NSString *destinationPath = [bundlesDir stringByAppendingPathComponent:[bundle.path lastPathComponent]];
+	NSError *deleteExistingError = nil;
+	if (! [Installer deleteIfReplacing:destinationPath replacing:replacing error:&deleteExistingError]) {
+		*error = (deleteExistingError == nil) ?
+			[Installer errorWithMessage:@"An existing bundle is present that we wouldn't or couldn't remove."]
+			: deleteExistingError;
+		NSLog(@"Failed, because an existing bundle is present that we wouldn't or couldn't remove.");
+		return NO;
+	}
+	
+	// Step 4: Move
+	NSError *moveError = nil;
+	if (! [Installer moveBundleAtPath:bundle.path toPath:destinationPath error:&moveError]) {
+		*error = (moveError == nil) ?
+			[Installer errorWithMessage:@"Failed to move the plugin."]
+			: moveError;
+		NSLog(@"Failed to move the bundle.");
+		return NO;
+	}
+	
+	// We did it! Inform the caller of the destination
+	*destination = destinationPath;
+	return YES;
+
 }
 
-/*!
-	@method findOrCreateDisabledBundlesDirectoryForDomain:
-	@abstract Returns path to the directory for disabled bundles on success; nil on failure.
-	@discussion
-	
-*/
-+ (NSString *)findOrCreateDisabledBundlesDirectoryForDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
-{
-	return [Installer findOrCreateLibrarySubdirectory:DisabledBundleSubdirectory forDomain:domain error:error];
-}
-
-
+// Install/Remove
 /*!
 	@method installBundle:forDomain:replacing:
 	@abstract Installs the given mailbundle's files into the requested domain. Returns true if successful.
@@ -122,6 +216,29 @@
 
 // ----------------------- Utilities ----------------------------
 /*!
+	@method findOrCreateBundlesDirectoryForDomain:
+	@abstract Kinda like it says. Returns path to the bundles directory on success; nil on failure.
+	@discussion
+	
+*/
++ (NSString *)findOrCreateBundlesDirectoryForDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
+{
+	return [Installer findOrCreateLibrarySubdirectory:BundleSubdirectory forDomain:domain error:error];
+}
+
+/*!
+	@method findOrCreateDisabledBundlesDirectoryForDomain:
+	@abstract Returns path to the directory for disabled bundles on success; nil on failure.
+	@discussion
+	
+*/
++ (NSString *)findOrCreateDisabledBundlesDirectoryForDomain:(NSSearchPathDomainMask)domain error:(NSError **)error
+{
+	return [Installer findOrCreateLibrarySubdirectory:DisabledBundleSubdirectory forDomain:domain error:error];
+}
+
+
+/*!
 	@method directoryExistsAtPath:
 	@abstract Returns true if a directory exists at the given path.
 	@discussion
@@ -158,6 +275,19 @@
 		*error = (copyItemError == nil) ?
 			[Installer errorWithMessage:@"Failed to copy the bundle (for an unknown reason)."]
 			: copyItemError;
+	}
+	return success;
+}
+
++ (BOOL)moveBundleAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)error
+{
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSError *moveItemError = nil;
+	BOOL success = [fileManager moveItemAtPath:sourcePath toPath:destinationPath error:&moveItemError];
+	if (! success) {
+		*error = (moveItemError == nil) ?
+			[Installer errorWithMessage:@"Failed to move the bundle (for an unknown reason)."]
+			: moveItemError;
 	}
 	return success;
 }

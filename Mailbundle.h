@@ -14,6 +14,7 @@
 	NSString *name;
 	NSString *identifier;
 	NSString *version;
+	NSString *description;
 	NSImage *icon;
 	NSBundle *bundle;
 	struct InstallationStatus installationStatus;
@@ -26,6 +27,7 @@
 @property (readonly) NSString *name;
 @property (readonly) NSString *identifier;
 @property (readonly) NSString *version;
+@property (readonly) NSString *description;
 @property (readonly) NSImage *icon;
 @property (readonly) NSBundle *bundle;
 @property (readonly) struct InstallationStatus installationStatus;

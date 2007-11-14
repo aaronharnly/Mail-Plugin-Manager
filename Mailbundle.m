@@ -99,6 +99,7 @@
 	name = [self.bundle objectForInfoDictionaryKey:@"CFBundleName"];
 	identifier = [self.bundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
 	version = [self.bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+	description = [self.bundle objectForInfoDictionaryKey:@"Description"];
 	icon = [[NSWorkspace sharedWorkspace] iconForFile:self.path];
 	installationStatus = [self getInstallationStatus];
 }
@@ -107,6 +108,7 @@
 @synthesize name;
 @synthesize identifier;
 @synthesize version;
+@synthesize description;
 @synthesize icon;
 @synthesize bundle;
 @synthesize installationStatus;

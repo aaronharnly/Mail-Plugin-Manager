@@ -50,13 +50,14 @@
 */
 - (void)updateDisplay
 {
-	[self.window setTitle:plugin.name];
-	[self.window setRepresentedURL:[NSURL fileURLWithPath:plugin.path]];
+	// some of these we take care of with bindings
+//	[nameField setStringValue:plugin.name];
+//	[versionField setStringValue:[NSString stringWithFormat:@"Version %@",plugin.version]];	
+//	[descriptionField setStringValue:@"No description available."];
+//	[pathBar setStringValue:plugin.path];
+//	[self.window setTitle:plugin.name];
+//	[self.window setRepresentedURL:[NSURL fileURLWithPath:plugin.path]];
 	[iconView setImage:plugin.icon];
-	[nameField setStringValue:plugin.name];
-	[versionField setStringValue:[NSString stringWithFormat:@"Version %@",plugin.version]];	
-	[descriptionField setStringValue:@"No description available."];
-	[pathBar setStringValue:plugin.path];
 	[installationStatusField setStringValue:[self textForName:self.plugin.name installationStatus:self.plugin.installationStatus]];
 	[otherCopiesStatusField setStringValue:@"Are there other copies installed? I dunno."];
 	[self configureButtonsForCurrentInstallationStatus];
@@ -172,24 +173,32 @@
 - (IBAction) enablePlugin:(id)sender
 {
 	NSError *error = nil;
-	BOOL success = [MailbundleOperations enableMailbundle:self.plugin error:&error];
+	NSString *destination = nil;
+	BOOL success = [MailbundleOperations enableMailbundle:self.plugin destination:&destination error:&error];
 	[self displayAlertForSuccess:success 
 		error:error
 		successMessage:@"Successfully enabled the plugin '%@'." 
 		successInfo:@"It will be available the next time you start Mail." 
 		failureMessage:@"Failed to enable the plugin '%@'."
 		pathToOpen:nil];
+	if (success) {
+		self.plugin.path = destination;
+	}
 }
 - (IBAction) disablePlugin:(id)sender
 {
 	NSError *error = nil;
-	BOOL success = [MailbundleOperations disableMailbundle:self.plugin error:&error];
+	NSString *destination = nil;
+	BOOL success = [MailbundleOperations disableMailbundle:self.plugin destination:&destination error:&error];
 	[self displayAlertForSuccess:success 
 		error:error
 		successMessage:@"Successfully disabled the plugin '%@'." 
 		successInfo:@"It will be absent the next time you start Mail." 
 		failureMessage:@"Failed to disable the plugin '%@'."
 		pathToOpen:nil];
+	if (success) {
+		self.plugin.path = destination;
+	}
 }
 
 
