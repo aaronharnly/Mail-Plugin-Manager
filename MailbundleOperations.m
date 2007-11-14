@@ -29,7 +29,7 @@
 }
 
 // Enable/disable
-+(BOOL) enableMailbundle:(Mailbundle *)bundle error:(NSError **)error
++(BOOL) enableMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error
 {
 	if (! bundle.installationStatus.installed) {
 		*error = [MailbundleOperations errorWithMessage:@"The plugin is not installed."];
@@ -41,7 +41,7 @@
 	}
 	return NO;
 }
-+(BOOL) disableMailbundle:(Mailbundle *)bundle error:(NSError **)error
++(BOOL) disableMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error
 {
 	return NO;
 }
