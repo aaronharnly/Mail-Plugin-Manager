@@ -92,6 +92,11 @@
 	
 	// Update any open plugin windows
 	[[NSApp delegate] movePath:oldPath toPath:newPath];
+
+	// Update the display of open windows
+	for (PluginWindowController *controller in [[NSApp delegate] pluginWindowControllers]) {
+		[controller updateDisplay];
+	}
 	
 }
 
@@ -119,8 +124,9 @@
 
 	// Also check the open windows; if any of them refer to mailbundles that can't be found, be unhappy.
 	for (NSString *path in [[NSApp delegate] pluginWindowControllers]) {
+		PluginWindowController *controller = [[[NSApp delegate] pluginWindowControllers] objectForKey:path];
+		[controller updateDisplay];
 		if (! [Mailbundle mailbundleExistsAtPath:path]) {
-			PluginWindowController *controller = [[[NSApp delegate] pluginWindowControllers] objectForKey:path];
 			Mailbundle *bundle = [controller plugin];
 			NSString *lostMessage = [NSString stringWithFormat:@"%@ has been moved from its previous location by another application.", [bundle name]];
 			[self displayAlertForMailbundle:bundle window:[controller window] success:NO error:nil successMessage:@"" successInfo:@"" failureMessage:lostMessage];

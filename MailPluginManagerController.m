@@ -52,11 +52,6 @@
 	}
 }
 
--(IBAction)refreshLibrary:(id)sender
-{
-	[pluginLibraryController refresh:sender];
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
 	// we've been alerted that a bundle's path has changed

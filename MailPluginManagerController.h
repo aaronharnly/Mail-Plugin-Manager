@@ -21,7 +21,6 @@
 	IBOutlet FSEventsController *fsEventsController;
 }
 -(IBAction)openDocumentPanel:(id)sender;
--(IBAction)refreshLibrary:(id)sender;
 -(void)openDocumentPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo;
 -(void)removeWindowControllerForPath:(NSString *)path;
 -(void)movePath:(NSString *)oldPath toPath:(NSString *)newPath;
