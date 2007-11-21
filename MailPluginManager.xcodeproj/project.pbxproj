@@ -22,6 +22,13 @@
 		937386860CE5232C007EFB20 /* Mailbundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386850CE5232C007EFB20 /* Mailbundle.m */; };
 		9373868A0CE52354007EFB20 /* Installer.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386890CE52354007EFB20 /* Installer.m */; };
 		937386990CE523B7007EFB20 /* PluginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386980CE523B7007EFB20 /* PluginWindowController.m */; };
+		93A249270CF35C0900C7026C /* PausePlay.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 93A249260CF35C0900C7026C /* PausePlay.tiff */; };
+		93A249E90CF373BB00C7026C /* MailbundleOperationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A249E80CF373BB00C7026C /* MailbundleOperationController.m */; };
+		93A24A440CF37A3300C7026C /* MailbundleUIUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A24A430CF37A3300C7026C /* MailbundleUIUpdater.m */; };
+		93A24BA90CF3A62A00C7026C /* FSEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A24BA80CF3A62A00C7026C /* FSEventsController.m */; };
+		93A24BC90CF3A77A00C7026C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A24BC80CF3A77A00C7026C /* CoreServices.framework */; };
+		93D000040CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D000030CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m */; };
+		93D0002F0CECAA21007705DB /* InstallationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D0002E0CECAA21007705DB /* InstallationStatus.m */; };
 		93D0FDF40CEB75D5007705DB /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDE80CEB75D5007705DB /* delete.png */; };
 		93D0FDF50CEB75D5007705DB /* find.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDE90CEB75D5007705DB /* find.png */; };
 		93D0FDF60CEB75D5007705DB /* Mailbundle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDEA0CEB75D5007705DB /* Mailbundle.icns */; };
@@ -32,6 +39,8 @@
 		93D0FDFF0CEB75D5007705DB /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDF30CEB75D5007705DB /* stop.png */; };
 		93D0FE2E0CEB8898007705DB /* NSFileManager+TRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D0FE2D0CEB8898007705DB /* NSFileManager+TRAdditions.m */; };
 		93D0FE860CEB91E5007705DB /* NSString+TRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D0FE850CEB91E5007705DB /* NSString+TRAdditions.m */; };
+		93D0FFA90CEBB8C1007705DB /* PluginLibraryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D0FFA80CEBB8C1007705DB /* PluginLibraryController.m */; };
+		93E253A20CEE312F00D9525A /* AlertFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E253A10CEE312F00D9525A /* AlertFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +76,17 @@
 		937386890CE52354007EFB20 /* Installer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Installer.m; sourceTree = "<group>"; };
 		937386970CE523B7007EFB20 /* PluginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginWindowController.h; sourceTree = "<group>"; };
 		937386980CE523B7007EFB20 /* PluginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginWindowController.m; sourceTree = "<group>"; };
+		93A249260CF35C0900C7026C /* PausePlay.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PausePlay.tiff; sourceTree = "<group>"; };
+		93A249E70CF373BB00C7026C /* MailbundleOperationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailbundleOperationController.h; sourceTree = "<group>"; };
+		93A249E80CF373BB00C7026C /* MailbundleOperationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailbundleOperationController.m; sourceTree = "<group>"; };
+		93A24A420CF37A3300C7026C /* MailbundleUIUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailbundleUIUpdater.h; sourceTree = "<group>"; };
+		93A24A430CF37A3300C7026C /* MailbundleUIUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailbundleUIUpdater.m; sourceTree = "<group>"; };
+		93A24BA70CF3A62A00C7026C /* FSEventsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEventsController.h; sourceTree = "<group>"; };
+		93A24BA80CF3A62A00C7026C /* FSEventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEventsController.m; sourceTree = "<group>"; };
+		93A24BC80CF3A77A00C7026C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
+		93D000020CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CocoaDevUsersAdditions.h"; sourceTree = "<group>"; };
+		93D000030CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CocoaDevUsersAdditions.m"; sourceTree = "<group>"; };
+		93D0002E0CECAA21007705DB /* InstallationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstallationStatus.m; sourceTree = "<group>"; };
 		93D0FDE80CEB75D5007705DB /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		93D0FDE90CEB75D5007705DB /* find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = find.png; sourceTree = "<group>"; };
 		93D0FDEA0CEB75D5007705DB /* Mailbundle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Mailbundle.icns; sourceTree = "<group>"; };
@@ -83,6 +103,10 @@
 		93D0FE2D0CEB8898007705DB /* NSFileManager+TRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+TRAdditions.m"; sourceTree = "<group>"; };
 		93D0FE840CEB91E5007705DB /* NSString+TRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TRAdditions.h"; sourceTree = "<group>"; };
 		93D0FE850CEB91E5007705DB /* NSString+TRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TRAdditions.m"; sourceTree = "<group>"; };
+		93D0FFA70CEBB8C1007705DB /* PluginLibraryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginLibraryController.h; sourceTree = "<group>"; };
+		93D0FFA80CEBB8C1007705DB /* PluginLibraryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginLibraryController.m; sourceTree = "<group>"; };
+		93E253A00CEE312F00D9525A /* AlertFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertFactory.h; sourceTree = "<group>"; };
+		93E253A10CEE312F00D9525A /* AlertFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertFactory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				93A24BC90CF3A77A00C7026C /* CoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +128,8 @@
 				937386740CE52165007EFB20 /* Models */,
 				937386710CE52161007EFB20 /* Views */,
 				9373868B0CE52365007EFB20 /* ViewControllers */,
-				937386750CE5216A007EFB20 /* Controllers */,
+				93D0FFA60CEBB866007705DB /* ModelControllers */,
+				937386750CE5216A007EFB20 /* AppControllers */,
 				937386870CE52333007EFB20 /* Processors */,
 			);
 			name = Classes;
@@ -112,6 +138,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93A24BC80CF3A77A00C7026C /* CoreServices.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -196,17 +223,22 @@
 				9338E3410CEA6A6700CAEC13 /* Utilities.h */,
 				9338E3420CEA6A6700CAEC13 /* Utilities.m */,
 				9338E38A0CEA7B2300CAEC13 /* InstallationStatus.h */,
+				93D0002E0CECAA21007705DB /* InstallationStatus.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
 		};
-		937386750CE5216A007EFB20 /* Controllers */ = {
+		937386750CE5216A007EFB20 /* AppControllers */ = {
 			isa = PBXGroup;
 			children = (
 				937386760CE52186007EFB20 /* MailPluginManagerController.h */,
 				937386770CE52186007EFB20 /* MailPluginManagerController.m */,
+				93A249E70CF373BB00C7026C /* MailbundleOperationController.h */,
+				93A249E80CF373BB00C7026C /* MailbundleOperationController.m */,
+				93A24BA70CF3A62A00C7026C /* FSEventsController.h */,
+				93A24BA80CF3A62A00C7026C /* FSEventsController.m */,
 			);
-			name = Controllers;
+			name = AppControllers;
 			sourceTree = "<group>";
 		};
 		937386870CE52333007EFB20 /* Processors */ = {
@@ -229,6 +261,10 @@
 				937386980CE523B7007EFB20 /* PluginWindowController.m */,
 				9338DFD10CE8ECF200CAEC13 /* PluginLibraryWindowController.h */,
 				9338DFD20CE8ECF200CAEC13 /* PluginLibraryWindowController.m */,
+				93A24A420CF37A3300C7026C /* MailbundleUIUpdater.h */,
+				93A24A430CF37A3300C7026C /* MailbundleUIUpdater.m */,
+				93E253A00CEE312F00D9525A /* AlertFactory.h */,
+				93E253A10CEE312F00D9525A /* AlertFactory.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -245,6 +281,7 @@
 		93D0FDE70CEB75D5007705DB /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				93A249260CF35C0900C7026C /* PausePlay.tiff */,
 				93D0FDE80CEB75D5007705DB /* delete.png */,
 				93D0FDE90CEB75D5007705DB /* find.png */,
 				93D0FDEA0CEB75D5007705DB /* Mailbundle.icns */,
@@ -268,8 +305,19 @@
 				93D0FE850CEB91E5007705DB /* NSString+TRAdditions.m */,
 				93D0FE2C0CEB8898007705DB /* NSFileManager+TRAdditions.h */,
 				93D0FE2D0CEB8898007705DB /* NSFileManager+TRAdditions.m */,
+				93D000020CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.h */,
+				93D000030CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		93D0FFA60CEBB866007705DB /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				93D0FFA70CEBB8C1007705DB /* PluginLibraryController.h */,
+				93D0FFA80CEBB8C1007705DB /* PluginLibraryController.m */,
+			);
+			name = ModelControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +374,7 @@
 				93D0FDFD0CEB75D5007705DB /* Play.tiff in Resources */,
 				93D0FDFE0CEB75D5007705DB /* reload.png in Resources */,
 				93D0FDFF0CEB75D5007705DB /* stop.png in Resources */,
+				93A249270CF35C0900C7026C /* PausePlay.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +398,13 @@
 				9338E3430CEA6A6700CAEC13 /* Utilities.m in Sources */,
 				93D0FE2E0CEB8898007705DB /* NSFileManager+TRAdditions.m in Sources */,
 				93D0FE860CEB91E5007705DB /* NSString+TRAdditions.m in Sources */,
+				93D0FFA90CEBB8C1007705DB /* PluginLibraryController.m in Sources */,
+				93D000040CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m in Sources */,
+				93D0002F0CECAA21007705DB /* InstallationStatus.m in Sources */,
+				93E253A20CEE312F00D9525A /* AlertFactory.m in Sources */,
+				93A249E90CF373BB00C7026C /* MailbundleOperationController.m in Sources */,
+				93A24A440CF37A3300C7026C /* MailbundleUIUpdater.m in Sources */,
+				93A24BA90CF3A62A00C7026C /* FSEventsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

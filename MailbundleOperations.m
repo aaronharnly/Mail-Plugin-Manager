@@ -10,6 +10,8 @@
 #import "Mailbundle.h"
 #import "Installer.h"
 #import "MailPreferencesFiddler.h"
+#import "Constants.h"
+#import "Utilities.h"
 
 @implementation MailbundleOperations
 +(NSError *)errorWithMessage:(NSString *)message
@@ -19,13 +21,28 @@
 				forKey:@"ErrorMessage"]];
 }
 
-+(NSArray *) getInstalledMailbundles 
++(NSArray *) getInstalledMailbundlePaths 
 {
-	return [NSArray array];
+	return [[MailbundleOperations getInstalledMailbundlePathsInDomain:NSUserDomainMask] arrayByAddingObjectsFromArray:
+		[MailbundleOperations getInstalledMailbundlePathsInDomain:NSLocalDomainMask]];
 }
-+(NSArray *) getInstalledMailbundlesInDomain:(NSSearchPathDomainMask)domain
++(NSArray *) getInstalledMailbundlePathsInDomain:(NSSearchPathDomainMask)domain
 {
-	return [NSArray array];
+	return [[MailbundleOperations getInstalledMailbundlePathsInDomain:domain enabled:YES] arrayByAddingObjectsFromArray:
+		[MailbundleOperations getInstalledMailbundlePathsInDomain:domain enabled:NO]];
+}
++(NSArray *) getInstalledMailbundlePathsInDomain:(NSSearchPathDomainMask)domain enabled:(BOOL)enabled;
+{
+	NSString *subDirectory = (enabled) ? BundleSubdirectory : DisabledBundleSubdirectory;
+	NSString *directory = [Utilities librarySubdirectoryPath:subDirectory inDomain:domain];
+	NSArray *directoryContents = [[NSFileManager defaultManager] directoryContentsAtPath:directory];
+	NSMutableArray *justMailbundles = [NSMutableArray arrayWithCapacity:[directoryContents count]];
+	for (NSString *filename in directoryContents) {
+		if ([[filename pathExtension] caseInsensitiveCompare:@"mailbundle"] == NSOrderedSame) {
+			[justMailbundles addObject:[directory stringByAppendingPathComponent:filename]];
+		}
+	}
+	return [NSArray arrayWithArray:justMailbundles];
 }
 
 // Enable/disable

@@ -8,13 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class PluginLibraryController;
 
 @interface PluginLibraryWindowController : NSWindowController {
+	IBOutlet PluginLibraryController *pluginLibraryController;
 	IBOutlet NSToolbarItem *enableDisableItem;
+	IBOutlet NSTableView *tableView;
 }
--(IBAction) refreshListing;
--(IBAction) enableOrDisableSelection;
--(IBAction) revealSelectionInFinder;
--(IBAction) removeSelection;
+-(IBAction) openRow:(id) sender;
+-(IBAction) refreshListing:(id) sender;
+-(IBAction) enableOrDisableSelection:(id) sender;
+-(IBAction) enableOrDisableRow:(id) sender;
+-(IBAction) revealSelectionInFinder:(id) sender;
+-(IBAction) removeSelection:(id) sender;
 
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
+@property (readonly) PluginLibraryController *pluginLibraryController;
 @end

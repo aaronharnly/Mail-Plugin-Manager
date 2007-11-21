@@ -9,13 +9,18 @@
 #import <Cocoa/Cocoa.h>
 
 /*!
-	@struct InstallationStatus
+	@class InstallationStatus
 	@abstract Indicates the current status of a mailbundle (which is purely determined by its path)
-	@discussion
-	
+	@discussion	
 */
-struct InstallationStatus {
+@interface InstallationStatus : NSObject {
 	BOOL installed;
 	BOOL enabled;
 	NSSearchPathDomainMask domain;
-};
+	NSString *domainName;
+}
+@property BOOL installed;
+@property BOOL enabled;
+@property NSSearchPathDomainMask domain;
+@property (readonly) NSString *domainName;
+@end

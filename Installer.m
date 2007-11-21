@@ -23,18 +23,19 @@
 +(BOOL) enableMailbundle:(Mailbundle *)bundle replacing:(BOOL)replacing destination:(NSString **)destination error:(NSError **)error
 {
 	// Step 0: validate
-	if (! bundle.installationStatus.installed) {
+	if (! bundle.installed) {
 		*error = [Installer errorWithMessage:@"This plugin isn't installed."];
 		return NO;
 	}
-	if (bundle.installationStatus.enabled) {
+
+	if (bundle.enabled) {
 		*error = [Installer errorWithMessage:@"This plugin is already enabled."];
 		return NO;
 	}
 
 	// Step 1: Get our bundles dir
 	NSError *bundleDirError = nil;
-	NSString *bundlesDir = [Installer findOrCreateBundlesDirectoryForDomain:bundle.installationStatus.domain error:&bundleDirError];
+	NSString *bundlesDir = [Installer findOrCreateBundlesDirectoryForDomain:bundle.domain error:&bundleDirError];
 	if (bundlesDir == nil) {
 		*error = (bundleDirError == nil) ?
 			[Installer errorWithMessage:@"Couldn't find or create the Bundles directory."]
@@ -80,18 +81,18 @@
 +(BOOL) disableMailbundle:(Mailbundle *)bundle replacing:(BOOL)replacing destination:(NSString **)destination error:(NSError **)error
 {
 	// Step 0: validate
-	if (! bundle.installationStatus.installed) {
+	if (! bundle.installed) {
 		*error = [Installer errorWithMessage:@"This plugin isn't installed."];
 		return NO;
 	}
-	if (! bundle.installationStatus.enabled) {
+	if (! bundle.enabled) {
 		*error = [Installer errorWithMessage:@"This plugin is already disabled."];
 		return NO;
 	}
 
 	// Step 1: Get our disabled-bundles dir
 	NSError *bundleDirError = nil;
-	NSString *bundlesDir = [Installer findOrCreateDisabledBundlesDirectoryForDomain:bundle.installationStatus.domain error:&bundleDirError];
+	NSString *bundlesDir = [Installer findOrCreateDisabledBundlesDirectoryForDomain:bundle.domain error:&bundleDirError];
 	if (bundlesDir == nil) {
 		*error = (bundleDirError == nil) ?
 			[Installer errorWithMessage:@"Couldn't find or create the Disabled Bundles directory."]

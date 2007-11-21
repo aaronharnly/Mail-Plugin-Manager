@@ -20,3 +20,16 @@ extern NSString *MailbundleExtension;
 extern NSString *ErrorMessageKey;
 extern NSString *MailbundlesEnabledKey;
 extern NSString *MailbundleVersionKey;
+
+// notifications
+extern NSString *MailbundleDisabledNotification;
+extern NSString *MailbundleEnabledNotification;
+extern NSString *MailbundleRemovedNotification;
+extern NSString *MailbundleInstalledNotification;
+extern NSString *MailbundleFilesystemChangedNotification;
+
+extern NSString *MailbundleOperationWindowKey;
+extern NSString *MailbundleOperationOriginPathKey;
+extern NSString *MailbundleOperationDestinationPathKey;
+extern NSString *MailbundleOperationSuccessKey;
+extern NSString *MailbundleOperationErrorKey;

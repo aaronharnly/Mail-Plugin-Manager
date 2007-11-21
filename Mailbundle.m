@@ -12,27 +12,31 @@
 #import "InstallationStatus.h"
 
 @implementation Mailbundle
-// Get information
--(id)initWithPath:(NSString *)aPath
-{
-	self = [super init];
-	if (self != nil) {
-		self.path = aPath;
-	}
-	return self;
-}
 
--(struct InstallationStatus) getInstallationStatus
++ (BOOL)mailbundleExistsAtPath:(NSString *)path
+{
+	NSString *extension = [path pathExtension];
+	if (! [extension isEqualToString:MailbundleExtension]) {
+		NSLog(@"Doesn't appear to be a mailbundle: '%@'",path);
+		return NO;
+	}
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	BOOL isDirectory = NO;
+	if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory)
+		return YES;
+	return NO;
+}
++(InstallationStatus *) getInstallationStatusForPath:(NSString *)aPath
 {
 	NSString *userBundleDir = [Utilities librarySubdirectoryPath:BundleSubdirectory inDomain:NSUserDomainMask];
 	NSString *userDisabledBundleDir = [Utilities librarySubdirectoryPath:DisabledBundleSubdirectory inDomain:NSUserDomainMask];
 	NSString *localBundleDir = [Utilities librarySubdirectoryPath:BundleSubdirectory inDomain:NSLocalDomainMask];
 	NSString *localDisabledBundleDir = [Utilities librarySubdirectoryPath:DisabledBundleSubdirectory inDomain:NSLocalDomainMask];
 	
-	struct InstallationStatus newStatus;
-	NSRange userBundleResult = [self.path rangeOfString:userBundleDir options:NSCaseInsensitiveSearch];
+	InstallationStatus *newStatus = [[InstallationStatus alloc] init];
+	NSRange userBundleResult = [aPath rangeOfString:userBundleDir options:NSCaseInsensitiveSearch];
 	
-	NSRange userDisabledBundleResult = [self.path rangeOfString:userDisabledBundleDir options:NSCaseInsensitiveSearch];
+	NSRange userDisabledBundleResult = [aPath rangeOfString:userDisabledBundleDir options:NSCaseInsensitiveSearch];
 	if (userDisabledBundleResult.location != NSNotFound) {
 		newStatus.installed = YES;
 		newStatus.enabled = NO;
@@ -47,7 +51,7 @@
 		return newStatus;
 	}
 
-	NSRange localDisabledBundleResult = [self.path rangeOfString:localDisabledBundleDir options:NSCaseInsensitiveSearch];
+	NSRange localDisabledBundleResult = [aPath rangeOfString:localDisabledBundleDir options:NSCaseInsensitiveSearch];
 	if (localDisabledBundleResult.location != NSNotFound) {
 		newStatus.installed = YES;
 		newStatus.enabled = NO;
@@ -55,7 +59,7 @@
 		return newStatus;	
 	}
 	
-	NSRange localBundleResult = [self.path rangeOfString:localBundleDir options:NSCaseInsensitiveSearch];
+	NSRange localBundleResult = [aPath rangeOfString:localBundleDir options:NSCaseInsensitiveSearch];
 	if (localBundleResult.location != NSNotFound) {
 		newStatus.installed = YES;
 		newStatus.enabled = YES;
@@ -68,49 +72,88 @@
 	newStatus.domain = 0;
 	return newStatus;	
 }
--(BOOL) determineWhetherIsInstalledAndEnabled
+
+
++(NSError *)errorWithMessage:(NSString *)message
 {
-	// We'll assume we're installed if we're in either the user-domain or local-domain bundle dirs.
-	BOOL isInBundleDir = NO;
-	for (NSString *bundleDir in [Utilities bundleDirectories]) {
-		NSRange searchResult = [self.path rangeOfString:bundleDir options:NSCaseInsensitiveSearch];
-		if (searchResult.location != NSNotFound) {
-			isInBundleDir = YES;
-		}
-	}
-	return isInBundleDir;
-}
--(BOOL) determineWhetherIsInstalledAndDisabled
-{
-	// We'll assume we're installed if we're in either the user-domain or local-domain bundle dirs.
-	BOOL isInBundleDir = NO;
-	for (NSString *bundleDir in [Utilities disabledBundleDirectories]) {
-		NSRange searchResult = [self.path rangeOfString:bundleDir options:NSCaseInsensitiveSearch];
-		if (searchResult.location != NSNotFound)
-			isInBundleDir = YES;
-	}
-	return isInBundleDir;
+	return [NSError errorWithDomain:@"Mailbundle" code:1 userInfo:[NSDictionary 
+				dictionaryWithObject:message
+				forKey:@"ErrorMessage"]];
 }
 
+
+// Get information
+-(id)initWithPath:(NSString *)aPath
+{
+	self = [super init];
+	if (self != nil) {
+		if (! [Mailbundle mailbundleExistsAtPath:aPath]) {
+			return nil;
+		} else {
+			self.path = aPath;		
+		}
+	}
+	return self;
+}
+
+-(BOOL)validatePath:(id *)ioValue error:(NSError **)outError {
+	NSString *ioPath = *ioValue;
+	// step 1: Test that there's a mailbundle
+	if (! [Mailbundle mailbundleExistsAtPath:ioPath]) {
+		*outError = [Mailbundle errorWithMessage:[NSString stringWithFormat:@"No mailbundle file appears to exist at: %@", ioPath]];
+		return NO;
+	}
+
+	NSBundle *testBundle = [NSBundle bundleWithPath:ioPath];
+	if (testBundle == nil) {
+		*outError = [Mailbundle errorWithMessage:[NSString stringWithFormat:@"Couldn't load bundle information for path: %@", ioPath]];
+		return NO;
+	}
+	return YES;
+}
+-(void) setDomain:(NSSearchPathDomainMask)aDomain 
+{
+	domain = aDomain;
+	switch (domain) {
+		case NSUserDomainMask:
+			domainName = @"This user";
+			break;
+		case NSLocalDomainMask:
+			domainName = @"All users";
+			break;
+		default:
+			domainName = @"(unknown)";
+			break;
+	}
+}
 -(void)setPath:(NSString *)newPath
 {
 	path = newPath;
-	bundle = [NSBundle bundleWithPath:path];
-	name = [self.bundle objectForInfoDictionaryKey:@"CFBundleName"];
-	identifier = [self.bundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-	version = [self.bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
-	description = [self.bundle objectForInfoDictionaryKey:@"Description"];
-	icon = [[NSWorkspace sharedWorkspace] iconForFile:self.path];
-	installationStatus = [self getInstallationStatus];
+	self.bundle = [NSBundle bundleWithPath:path];
+	self.name = [self.bundle objectForInfoDictionaryKey:@"CFBundleName"];
+	self.identifier = [self.bundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+	self.version = [self.bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+	self.bundleDescription = [self.bundle objectForInfoDictionaryKey:@"Description"];
+	self.icon = [[NSWorkspace sharedWorkspace] iconForFile:self.path];
+	InstallationStatus *newStatus = [Mailbundle getInstallationStatusForPath:path];
+	self.installed = newStatus.installed;
+	self.enabled = newStatus.enabled;
+	self.domain = newStatus.domain;
+}
+
+-(NSString *)description {
+	return self.path;
 }
 
 @synthesize path;
 @synthesize name;
 @synthesize identifier;
 @synthesize version;
-@synthesize description;
+@synthesize bundleDescription;
 @synthesize icon;
 @synthesize bundle;
-@synthesize installationStatus;
-
+@synthesize installed;
+@synthesize enabled;
+@synthesize domain;
+@synthesize domainName;
 @end

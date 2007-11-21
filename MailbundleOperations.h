@@ -16,8 +16,9 @@
 
 }
 // Get information
-+(NSArray *) getInstalledMailbundles;
-+(NSArray *) getInstalledMailbundlesInDomain:(NSSearchPathDomainMask)domain;
++(NSArray *) getInstalledMailbundlePaths;
++(NSArray *) getInstalledMailbundlePathsInDomain:(NSSearchPathDomainMask)domain;
++(NSArray *) getInstalledMailbundlePathsInDomain:(NSSearchPathDomainMask)domain enabled:(BOOL)enabled;
 
 // Enable/disable
 +(BOOL) enableMailbundle:(Mailbundle *)bundle destination:(NSString **)destination error:(NSError **)error;

@@ -19,3 +19,15 @@ NSString *ErrorMessageKey = @"ErrorMessage";
 NSString *MailbundlesEnabledKey = @"EnableBundles";
 NSString *MailbundleVersionKey = @"BundleCompatibilityVersion";
 
+// notifications
+NSString *MailbundleDisabledNotification = @"MailbundleDisabledNotification";
+NSString *MailbundleEnabledNotification = @"MailbundleEnabledNotification";
+NSString *MailbundleRemovedNotification = @"MailbundleRemovedNotification";
+NSString *MailbundleInstalledNotification = @"MailbundleInstalledNotification";
+NSString *MailbundleFilesystemChangedNotification = @"MailbundleFilesystemChangedNotification";
+
+NSString *MailbundleOperationWindowKey = @"Window";
+NSString *MailbundleOperationOriginPathKey = @"OriginPath";
+NSString *MailbundleOperationDestinationPathKey = @"DestinationPath";
+NSString *MailbundleOperationSuccessKey = @"SuccessKey";
+NSString *MailbundleOperationErrorKey = @"Error";

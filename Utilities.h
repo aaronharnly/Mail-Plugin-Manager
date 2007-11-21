@@ -15,5 +15,4 @@
 +(NSString *) librarySubdirectoryPath:(NSString *)subpath inDomain:(NSSearchPathDomainMask)domain;
 +(NSArray *) bundleDirectories;
 +(NSArray *) disabledBundleDirectories;
-
 @end

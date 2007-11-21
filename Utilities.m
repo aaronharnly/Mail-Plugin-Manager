@@ -38,7 +38,7 @@
 		localBundleDir = [Utilities librarySubdirectoryPath:BundleSubdirectory inDomain:NSLocalDomainMask];
 	}
 	if (bundleDirectories == nil) {
-		bundleDirectories = [NSArray arrayWithObjects:userBundleDir, localBundleDir];
+		bundleDirectories = [NSArray arrayWithObjects:userBundleDir, localBundleDir, nil];
 	}
 	
 	return bundleDirectories;
@@ -57,7 +57,7 @@
 		localDisabledBundleDir = [Utilities librarySubdirectoryPath:DisabledBundleSubdirectory inDomain:NSLocalDomainMask];
 	}
 	if (disabledBundleDirectories == nil) {
-		disabledBundleDirectories = [NSArray arrayWithObjects:userDisabledBundleDir, localDisabledBundleDir];
+		disabledBundleDirectories = [NSArray arrayWithObjects:userDisabledBundleDir, localDisabledBundleDir, nil];
 	}
 	return disabledBundleDirectories;
 }

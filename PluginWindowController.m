@@ -10,7 +10,9 @@
 #import "Mailbundle.h"
 #import "TransparentImageView.h"
 #import "MailbundleOperations.h"
-#import "InstallationStatus.h"
+#import "MailbundleOperationController.h"
+#import "MailPluginManagerController.h"
+#import "AlertFactory.h"
 
 @implementation PluginWindowController
 // ------------ NSWindowController methods ---------
@@ -27,13 +29,23 @@
 	[self updateDisplay];
 }
 
+// ------------ NSWindow delegate methods ---------
+- (void)windowWillClose:(NSNotification *)notification
+{
+	NSWindow *closingWindow = [notification object];
+	if (closingWindow == [self window]) {
+		// Tell the app delegate to stop tracking us
+		[[NSApp delegate] removeWindowControllerForPath:self.plugin.path];
+	}
+}
+
 // ------------ manage view ------------
-- (NSString *)textForName:(NSString *) name installationStatus:(struct InstallationStatus)status {
+- (NSString *)textForName:(NSString *) name installed:(BOOL)installed enabled:(BOOL)enabled domain:(NSSearchPathDomainMask)domain {
 	NSString *statusText;
-	if (status.installed) {
-		NSString *domainText = (status.domain == NSUserDomainMask) ?
+	if (installed) {
+		NSString *domainText = (domain == NSUserDomainMask) ?
 			@"for this user" : @"for all users";
-		NSString *enabledText = (status.enabled) ? 
+		NSString *enabledText = (enabled) ? 
 			@" and enabled" : @" but disabled";
 		statusText = [NSString stringWithFormat:@"installed%@ %@.", enabledText, domainText];
 	} else {
@@ -50,15 +62,15 @@
 */
 - (void)updateDisplay
 {
-	// some of these we take care of with bindings
-//	[nameField setStringValue:plugin.name];
-//	[versionField setStringValue:[NSString stringWithFormat:@"Version %@",plugin.version]];	
-//	[descriptionField setStringValue:@"No description available."];
-//	[pathBar setStringValue:plugin.path];
-//	[self.window setTitle:plugin.name];
-//	[self.window setRepresentedURL:[NSURL fileURLWithPath:plugin.path]];
+	// most of these we take care of with bindings
+	//	nameField <-> plugin.name
+	//	versionField <-> plugin.version
+	//	descriptionField <-> plugin.description
+	//	pathBar <-> plugin.path
+	//	self.window.title <-> plugin.name
+	//	self.window.representedFilename <-> plugin.path
 	[iconView setImage:plugin.icon];
-	[installationStatusField setStringValue:[self textForName:self.plugin.name installationStatus:self.plugin.installationStatus]];
+	[installationStatusField setStringValue:[self textForName:self.plugin.name installed:self.plugin.installed enabled:self.plugin.enabled domain:self.plugin.domain]];
 	[otherCopiesStatusField setStringValue:@"Are there other copies installed? I dunno."];
 	[self configureButtonsForCurrentInstallationStatus];
 }
@@ -66,11 +78,11 @@
 - (void)configureButtonsForCurrentInstallationStatus {
 	[installOrRemoveButton setEnabled:YES];
 
-	if (self.plugin.installationStatus.installed) {
+	if (self.plugin.installed) {
 		[installOrRemoveButton setTitle:@"Remove"];				
 		[enableOrDisableButton setHidden:NO];
 		[enableOrDisableButton setEnabled:YES];
-		if (self.plugin.installationStatus.enabled) {
+		if (self.plugin.enabled) {
 			[enableOrDisableButton setTitle:@"Disable"];
 		} else {
 			[enableOrDisableButton setTitle:@"Enable"];		
@@ -83,43 +95,10 @@
 	[enableOrDisableButton setNeedsDisplay];
 }
 
-// ------------ manage alerts ------------
-- (void) displayAlertForSuccess:(BOOL)success error:(NSError *)error successMessage:(NSString *)successMessage successInfo:(NSString *)successInfo failureMessage:(NSString *)failureMessage pathToOpen:(NSString *)path
-{
-	// Display an alert appropriate to the result
-	NSAlert *alert = [[NSAlert alloc] init];
-	[alert addButtonWithTitle:@"OK"];
-	if (success) {
-		[alert setAlertStyle:NSInformationalAlertStyle];
-		[alert setIcon:[NSImage imageNamed:NSImageNameInfo]];
-		[alert setMessageText:[NSString stringWithFormat:successMessage, plugin.name]];
-		[alert setInformativeText:successInfo];
-	} else {
-		[alert setAlertStyle:NSCriticalAlertStyle];
-		[alert setMessageText:[NSString stringWithFormat:failureMessage, plugin.name]];
-		NSString *errorMessage = [[error userInfo] objectForKey:@"ErrorMessage"];
-		if (errorMessage == nil) 
-			errorMessage = @"No further information is available.";
-		[alert setInformativeText:errorMessage];
-	}
-	[alert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(pluginAlertDidEnd:returnCode:contextInfo:) contextInfo:path];
-}
-
-- (void) pluginAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo 
-{
-	[self updateDisplay];
-	[[alert window] orderOut:self];
-	if (contextInfo != nil) { // we gave a path to open when we're done.
-		[[NSApp delegate] application:NSApp openFile:contextInfo];
-	}
-}
-
-
-
 // ------------ install, remove ------------
 - (IBAction) installOrRemovePlugin:(id)sender
 {
-	if (self.plugin.installationStatus.installed)
+	if (self.plugin.installed)
 		[self removePlugin:sender];
 	else
 		[self installPlugin:sender];
@@ -130,15 +109,7 @@
 */
 - (IBAction) installPlugin:(id)sender 
 {
-	NSError *error = nil;
-	NSString *destination = nil;
-	BOOL success = [MailbundleOperations installMailbundle:self.plugin inDomain:NSUserDomainMask destination:&destination error:&error];
-	[self displayAlertForSuccess:success 
-		error:error 
-		successMessage:@"Successfully installed the plugin '%@'." 
-		successInfo:@"It will be available the next time you start Mail. I'll now open the installed plugin."
-		failureMessage:@"Failed to install the plugin '%@'."
-		pathToOpen:destination];
+	[[[NSApp delegate] operationController] installMailbundle:self.plugin inDomain:NSUserDomainMask window:[self window]];
 }
 
 /*!
@@ -146,59 +117,21 @@
 */
 - (IBAction) removePlugin:(id)sender 
 {
-	NSError *error = nil;
-	NSString *destination = nil;
-	BOOL success = [MailbundleOperations removeMailbundle:self.plugin destination:&destination error:&error];
-	[self displayAlertForSuccess:success 
-		error:error 
-		successMessage:@"Sucessfully removed the plugin '%@'." 
-		successInfo:@"It will be absent the next time you start Mail." 
-		failureMessage:@"Failed to remove the plugin '%@'."
-		pathToOpen:nil];
-	if (success) {
-		self.plugin.path = destination;
-	}
+	[[[NSApp delegate] operationController] removeMailbundle:self.plugin window:[self window]];
 }
 
 // -------------- enable, disable -----------------
 - (IBAction) enableOrDisablePlugin:(id)sender
 {
-	if (self.plugin.installationStatus.installed) {
-		if (self.plugin.installationStatus.enabled)
-			[self disablePlugin:sender];
-		else
-			[self enablePlugin:sender];
-	}
+	[[[NSApp delegate] operationController] enableOrDisableMailbundle:self.plugin window:[self window]];
 }
 - (IBAction) enablePlugin:(id)sender
 {
-	NSError *error = nil;
-	NSString *destination = nil;
-	BOOL success = [MailbundleOperations enableMailbundle:self.plugin destination:&destination error:&error];
-	[self displayAlertForSuccess:success 
-		error:error
-		successMessage:@"Successfully enabled the plugin '%@'." 
-		successInfo:@"It will be available the next time you start Mail." 
-		failureMessage:@"Failed to enable the plugin '%@'."
-		pathToOpen:nil];
-	if (success) {
-		self.plugin.path = destination;
-	}
+	[[[NSApp delegate] operationController] enableMailbundle:self.plugin window:[self window]];
 }
 - (IBAction) disablePlugin:(id)sender
 {
-	NSError *error = nil;
-	NSString *destination = nil;
-	BOOL success = [MailbundleOperations disableMailbundle:self.plugin destination:&destination error:&error];
-	[self displayAlertForSuccess:success 
-		error:error
-		successMessage:@"Successfully disabled the plugin '%@'." 
-		successInfo:@"It will be absent the next time you start Mail." 
-		failureMessage:@"Failed to disable the plugin '%@'."
-		pathToOpen:nil];
-	if (success) {
-		self.plugin.path = destination;
-	}
+	[[[NSApp delegate] operationController] disableMailbundle:self.plugin window:[self window]];
 }
 
 

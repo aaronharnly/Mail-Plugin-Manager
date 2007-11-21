@@ -7,28 +7,36 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "InstallationStatus.h"
+@class InstallationStatus;
 
 @interface Mailbundle : NSObject {
 	NSString *path;
 	NSString *name;
 	NSString *identifier;
 	NSString *version;
-	NSString *description;
+	NSString *bundleDescription;
 	NSImage *icon;
 	NSBundle *bundle;
-	struct InstallationStatus installationStatus;
+	BOOL installed;
+	BOOL enabled;
+	NSSearchPathDomainMask domain;
+	NSString *domainName;
 }
+
++ (BOOL)mailbundleExistsAtPath:(NSString *)path;
++ (InstallationStatus *) getInstallationStatusForPath:(NSString *)aPath;
+
 -(id)initWithPath:(NSString *)path;
 
--(struct InstallationStatus) getInstallationStatus;
-
 @property (copy) NSString *path;
-@property (readonly) NSString *name;
-@property (readonly) NSString *identifier;
-@property (readonly) NSString *version;
-@property (readonly) NSString *description;
-@property (readonly) NSImage *icon;
-@property (readonly) NSBundle *bundle;
-@property (readonly) struct InstallationStatus installationStatus;
+@property (copy) NSString *name;
+@property (copy) NSString *identifier;
+@property (copy) NSString *version;
+@property (copy) NSString *bundleDescription;
+@property (assign) NSImage *icon;
+@property (assign) NSBundle *bundle;
+@property BOOL installed;
+@property BOOL enabled;
+@property NSSearchPathDomainMask domain;
+@property (readonly) NSString *domainName;
 @end

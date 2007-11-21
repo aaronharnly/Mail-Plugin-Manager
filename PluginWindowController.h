@@ -26,12 +26,8 @@
 
 // manage view
 - (void)updateDisplay;
-- (NSString *)textForName:(NSString *)name installationStatus:(struct InstallationStatus)status;
+- (NSString *)textForName:(NSString *)name installed:(BOOL)installed enabled:(BOOL)enabled domain:(NSSearchPathDomainMask)domain;
 - (void)configureButtonsForCurrentInstallationStatus;
-
-// manage alerts
-- (void) displayAlertForSuccess:(BOOL)success error:(NSError *)error successMessage:(NSString *)successMessage successInfo:(NSString *)successInfo failureMessage:(NSString *)failureMessage pathToOpen:(NSString *)path;
-- (void) pluginAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 
 // install, remove
 - (IBAction) installOrRemovePlugin:(id)sender;
