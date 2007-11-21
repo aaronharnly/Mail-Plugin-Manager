@@ -133,7 +133,7 @@
 	self.name = [self.bundle objectForInfoDictionaryKey:@"CFBundleName"];
 	self.identifier = [self.bundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
 	self.version = [self.bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
-	self.bundleDescription = [self.bundle objectForInfoDictionaryKey:@"Description"];
+	self.bundleDescription = [self.bundle objectForInfoDictionaryKey:@"BundleDescription"];
 	self.icon = [[NSWorkspace sharedWorkspace] iconForFile:self.path];
 	InstallationStatus *newStatus = [Mailbundle getInstallationStatusForPath:path];
 	self.installed = newStatus.installed;
