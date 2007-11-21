@@ -100,13 +100,16 @@
 	NSString *ioPath = *ioValue;
 	// step 1: Test that there's a mailbundle
 	if (! [Mailbundle mailbundleExistsAtPath:ioPath]) {
-		*outError = [Mailbundle errorWithMessage:[NSString stringWithFormat:@"No mailbundle file appears to exist at: %@", ioPath]];
+		*outError = [Mailbundle errorWithMessage:
+		[NSString stringWithFormat:
+			NSLocalizedString(@"No mailbundle file appears to exist at: %@",@"Validation error"), ioPath]];
 		return NO;
 	}
 
 	NSBundle *testBundle = [NSBundle bundleWithPath:ioPath];
 	if (testBundle == nil) {
-		*outError = [Mailbundle errorWithMessage:[NSString stringWithFormat:@"Couldn't load bundle information for path: %@", ioPath]];
+		*outError = [Mailbundle errorWithMessage:[NSString stringWithFormat:
+			NSLocalizedString(@"Couldn't load bundle information for path: %@",@"Validation error"), ioPath]];
 		return NO;
 	}
 	return YES;
@@ -116,13 +119,13 @@
 	domain = aDomain;
 	switch (domain) {
 		case NSUserDomainMask:
-			domainName = @"This user";
+			domainName = NSLocalizedString(@"This user",@"User domain");
 			break;
 		case NSLocalDomainMask:
-			domainName = @"All users";
+			domainName = NSLocalizedString(@"All users",@"Local domain");
 			break;
 		default:
-			domainName = @"(unknown)";
+			domainName = NSLocalizedString(@"(unknown)",@"Unknown domain");
 			break;
 	}
 }

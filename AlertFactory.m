@@ -13,7 +13,7 @@
 + (NSAlert *) alertForPlugin:(Mailbundle *)plugin success:(BOOL)success error:(NSError *)error successMessage:(NSString *)successMessage successInfo:(NSString *)successInfo failureMessage:(NSString *)failureMessage
 {
 	NSAlert *alert = [[NSAlert alloc] init];
-	[alert addButtonWithTitle:@"OK"];
+	[alert addButtonWithTitle:NSLocalizedString(@"OK",@"Okay button")];
 	if (success) {
 		[alert setAlertStyle:NSInformationalAlertStyle];
 		[alert setIcon:[NSImage imageNamed:NSImageNameInfo]];
@@ -24,7 +24,7 @@
 		[alert setMessageText:[NSString stringWithFormat:failureMessage, plugin.name]];
 		NSString *errorMessage = [[error userInfo] objectForKey:@"ErrorMessage"];
 		if (errorMessage == nil) 
-			errorMessage = @"No further information is available.";
+			errorMessage = NSLocalizedString(@"No further information is available.",@"Default error explanation.");
 		[alert setInformativeText:errorMessage];
 	}
 	return alert;

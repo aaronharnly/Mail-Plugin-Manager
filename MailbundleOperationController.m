@@ -28,13 +28,6 @@
 		[userInfo setObject:destinationPath forKey:MailbundleOperationDestinationPathKey];
 	if (error != nil)
 		[userInfo setObject:error forKey:MailbundleOperationErrorKey];
-	NSLog(@"Notification name: %@", name);
-	NSLog(@"Bundle: %@", bundle);
-	NSLog(@"Window: %@", window);
-	NSLog(@"Origin path: %@", originPath);
-	NSLog(@"Destination path: %@", destinationPath);
-	NSLog(@"Success: %d", success);
-	NSLog(@"Error: %@", error);
 	[[NSNotificationCenter defaultCenter] 
 		postNotificationName:name 
 		object:bundle 

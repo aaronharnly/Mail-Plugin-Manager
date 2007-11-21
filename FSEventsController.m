@@ -47,7 +47,6 @@ void receiveFSEvents(
 	NSString *runLoopMode = NSDefaultRunLoopMode;
 	
 	FSEventStreamScheduleWithRunLoop(eventStream, runLoop, (CFStringRef) runLoopMode );
-	Boolean success = FSEventStreamStart(eventStream);
-	NSLog(@"Started listening for filesystem events in bundle directories: %d", success);
+	FSEventStreamStart(eventStream);
 }
 @end

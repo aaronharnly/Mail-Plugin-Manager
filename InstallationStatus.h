@@ -17,10 +17,8 @@
 	BOOL installed;
 	BOOL enabled;
 	NSSearchPathDomainMask domain;
-	NSString *domainName;
 }
 @property BOOL installed;
 @property BOOL enabled;
 @property NSSearchPathDomainMask domain;
-@property (readonly) NSString *domainName;
 @end

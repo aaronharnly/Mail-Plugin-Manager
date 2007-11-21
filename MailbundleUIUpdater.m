@@ -35,9 +35,9 @@
 
 - (void) displayAlertForNotification:(NSNotification *)notification
 {
-	NSString *successMessage = @"Succeeded.";
+	NSString *successMessage = NSLocalizedString(@"Succeeded.",@"Generic success message.");
 	NSString *successInfo = @"";
-	NSString *failureMessage = @"Failed.";
+	NSString *failureMessage = NSLocalizedString(@"Failed.",@"Generic failure message.");
 	
 	Mailbundle *bundle = [notification object];
 	NSString *operation = [notification name];
@@ -46,21 +46,29 @@
 	NSError *error = [[notification userInfo] objectForKey:MailbundleOperationErrorKey];
 
 	if ([operation isEqualToString:MailbundleInstalledNotification]) {
-		successMessage = [NSString stringWithFormat:@"Successfully installed %@", [bundle name]];
-		successInfo = @"It will be available when you next launch Mail.";
-		failureMessage = [NSString stringWithFormat:@"Failed to install %@", [bundle name]];
+		successMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Successfully installed %@",@"Installation message: success"), [bundle name]];
+		successInfo = NSLocalizedString(@"It will be available when you next launch Mail.",@"Installation message: success info");
+		failureMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Failed to install %@",@"Installation message: failure"), [bundle name]];
 	} else if ([operation isEqualToString:MailbundleRemovedNotification]) {
-		successMessage = [NSString stringWithFormat:@"Successfully removed %@", [bundle name]];
-		successInfo = @"It will be absent when you next launch Mail. You can retrieve it from the Trash if you change your mind.";
-		failureMessage = [NSString stringWithFormat:@"Failed to remove %@", [bundle name]];	
+		successMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Successfully removed %@",@"Removal message: success"), [bundle name]];
+		successInfo = NSLocalizedString(@"It will be absent when you next launch Mail. You can retrieve it from the Trash if you change your mind.",@"Removal message: success info");
+		failureMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Failed to remove %@",@"Removal message: failure"), [bundle name]];	
 	} else if ([operation isEqualToString:MailbundleEnabledNotification]) {
-		successMessage = [NSString stringWithFormat:@"Successfully enabled %@", [bundle name]];
-		successInfo = @"It will be available when you next launch Mail.";
-		failureMessage = [NSString stringWithFormat:@"Failed to enable %@", [bundle name]];	
+		successMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Successfully enabled %@",@"Enable message: success (not used)"), [bundle name]];
+		successInfo = NSLocalizedString(@"It will be available when you next launch Mail.",@"Enable message: success info (not used)");
+		failureMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Failed to enable %@",@"Enable message: failure (not used)"), [bundle name]];	
 	} else if ([operation isEqualToString:MailbundleDisabledNotification]) {
-		successMessage = [NSString stringWithFormat:@"Successfully disabled %@", [bundle name]];
-		successInfo = @"It will be absent when you next launch Mail.";
-		failureMessage = [NSString stringWithFormat:@"Failed to disable %@", [bundle name]];	
+		successMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Successfully disabled %@",@"Disable message: success (not used)"), [bundle name]];
+		successInfo = NSLocalizedString(@"It will be absent when you next launch Mail.",@"Disable message: success info (not used)");
+		failureMessage = [NSString stringWithFormat:
+			NSLocalizedString(@"Failed to disable %@",@"Disable message: failure (not used)"), [bundle name]];	
 	}
 
 	[self displayAlertForMailbundle:bundle window:window success:success error:error successMessage:successMessage successInfo:successInfo failureMessage:failureMessage];
@@ -128,7 +136,8 @@
 		[controller updateDisplay];
 		if (! [Mailbundle mailbundleExistsAtPath:path]) {
 			Mailbundle *bundle = [controller plugin];
-			NSString *lostMessage = [NSString stringWithFormat:@"%@ has been moved from its previous location by another application.", [bundle name]];
+			NSString *lostMessage = [NSString stringWithFormat:
+				NSLocalizedString(@"%@ has been moved from its previous location by another application.",@"Alert when a mailbundle has been moved by another application."), [bundle name]];
 			[self displayAlertForMailbundle:bundle window:[controller window] success:NO error:nil successMessage:@"" successInfo:@"" failureMessage:lostMessage];
 		} 
 	}

@@ -60,7 +60,6 @@
 +(NSArray *) getInstalledMailbundles
 {
 	NSArray *mailbundlePaths = [MailbundleOperations getInstalledMailbundlePaths];
-	NSLog(@"Have plugin paths: %@", mailbundlePaths);
 	NSMutableArray *mailbundles = [NSMutableArray arrayWithCapacity:[mailbundlePaths count]];
 	for (NSString *path in mailbundlePaths) {
 		Mailbundle *bundle = [[Mailbundle alloc] initWithPath:path];

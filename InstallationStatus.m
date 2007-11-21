@@ -13,20 +13,4 @@
 @synthesize installed;
 @synthesize enabled;
 @synthesize domain;
--(void) setDomain:(NSSearchPathDomainMask)aDomain 
-{
-	domain = aDomain;
-	switch (domain) {
-		case NSUserDomainMask:
-			domainName = @"This user";
-			break;
-		case NSLocalDomainMask:
-			domainName = @"All users";
-			break;
-		default:
-			domainName = @"(unknown)";
-			break;
-	}
-}
-@synthesize domainName;
 @end

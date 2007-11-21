@@ -51,7 +51,7 @@
 	NSError *moveError = nil;
 	if (! [Installer enableMailbundle:bundle replacing:YES destination:destination error:&moveError] ) {
 		*error = (moveError == nil) ?
-			[MailbundleOperations errorWithMessage:@"Enabling the mailbundle failed."]
+			[MailbundleOperations errorWithMessage:NSLocalizedString(@"Enabling the mailbundle failed.",@"Operations error (trying to enable)")]
 			: moveError;
 		return NO;
 	}
@@ -62,7 +62,7 @@
 	NSError *moveError = nil;
 	if (! [Installer disableMailbundle:bundle replacing:YES destination:destination error:&moveError] ) {
 		*error = (moveError == nil) ?
-			[MailbundleOperations errorWithMessage:@"Enabling the mailbundle failed."]
+			[MailbundleOperations errorWithMessage:NSLocalizedString(@"Enabling the mailbundle failed.",@"Operations error (trying to enable)")]
 			: moveError;
 		return NO;
 	}
@@ -75,14 +75,14 @@
 	NSError *enableError = nil;
 	if (! [MailPreferencesFiddler enableMailbundlesForCurrentVersionError:&enableError] ) {
 		*error = (enableError == nil) ?
-			[MailbundleOperations errorWithMessage:@"Setting Mail preferences to enable mailbundles failed."]
+			[MailbundleOperations errorWithMessage:NSLocalizedString(@"Setting Mail preferences to enable mailbundles failed.",@"Operations error (trying to enable)")]
 			: enableError;	
 		return NO;
 	}
 	NSError *installError = nil;
 	if (! [Installer installMailbundle:bundle inDomain:domain replacing:YES destination:destination error:&installError] ) {
 		*error = (installError == nil) ?
-			[MailbundleOperations errorWithMessage:@"Copying the mailbundle failed."]
+			[MailbundleOperations errorWithMessage:NSLocalizedString(@"Copying the mailbundle failed.",@"Operations error (trying to install)")]
 			: installError;
 		return NO;
 	}
@@ -93,7 +93,7 @@
 	NSError *removeError = nil;
 	if (! [Installer removeMailbundle:bundle destination:destination error:&removeError] ) {
 		*error = (removeError == nil) ?
-			[MailbundleOperations errorWithMessage:@"Removing the mailbundle failed."]
+			[MailbundleOperations errorWithMessage:NSLocalizedString(@"Removing the mailbundle failed.",@"Operations error (trying to remove)")]
 			: removeError;
 		return NO;
 	}

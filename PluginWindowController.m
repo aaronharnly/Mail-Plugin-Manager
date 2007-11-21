@@ -46,14 +46,18 @@
 	NSString *statusText;
 	if (installed) {
 		NSString *domainText = (domain == NSUserDomainMask) ?
-			@"for this user" : @"for all users";
+			NSLocalizedString(@"for this user",@"Plugin status: User domain description") 
+			: NSLocalizedString(@"for all users",@"Plugin status: Local domain description");
 		NSString *enabledText = (enabled) ? 
-			@" and enabled" : @" but disabled";
-		statusText = [NSString stringWithFormat:@"installed%@ %@.", enabledText, domainText];
+			NSLocalizedString(@"and enabled",@"Plugin status: enabled") 
+			: NSLocalizedString(@"but disabled",@"Plugin status: disabled");
+		statusText = [NSString stringWithFormat:
+			NSLocalizedString(@"installed %@ %@.",@"Plugin status: installed")
+			, enabledText, domainText];
 	} else {
-		statusText = @"not currently installed.";
+		statusText = NSLocalizedString(@"not currently installed.",@"Plugin status: not installed");
 	}
-	return [NSString stringWithFormat:@"This copy of %@ is %@",name, statusText];
+	return [NSString stringWithFormat:NSLocalizedString(@"This copy of %@ is %@",@"Plugin status: main string"),name, statusText];
 }
 
 - (NSString *)textDescribingInstalledCopiesOfMailbundle:(Mailbundle *)bundle
@@ -71,11 +75,14 @@
 	int totalEnabledExcludingThis = [enabledCopiesExcludingThis count];
 	
 	if (totalEnabledCopies == 0) {
-		return [NSString stringWithFormat:@"No copies of %@ are enabled.", [bundle name]];
+		return [NSString stringWithFormat:
+			NSLocalizedString(@"No copies of %@ are enabled.",@"Installation status: none"), [bundle name]];
 	} else if (totalEnabledExcludingThis == 0) {
-		return [NSString stringWithFormat:@"This is the only enabled copy of %@.", [bundle name]];	
+		return [NSString stringWithFormat:
+			NSLocalizedString(@"This is the only enabled copy of %@.",@"Installation status: one"), [bundle name]];	
 	} else if (totalEnabledExcludingThis == 1) {
-		return [NSString stringWithFormat:@"Version %@ is currently enabled.", [[enabledCopies firstObject] version]];
+		return [NSString stringWithFormat:
+			NSLocalizedString(@"Version %@ is currently enabled.",@"Installation status: One other copy is installed."), [[enabledCopies firstObject] version]];
 	} else {
 		NSMutableArray *enabledVersions = [NSMutableArray arrayWithCapacity:totalEnabledExcludingThis];
 		for (Mailbundle *enabledBundle in enabledCopiesExcludingThis) {
@@ -84,10 +91,11 @@
 		NSString *lastVersion = [enabledVersions lastObject];
 		NSArray *enabledVersionsExceptLast = [enabledVersions arrayByRemovingLastObject];
 		NSString *versionListPrefix = (bundle.enabled) ?
-			@"Other than this copy, versions" :
-			@"Versions";
+			NSLocalizedString(@"Other than this copy, versions",@"Installation status: Multiple other copies are installed, and so is this.") 
+			:NSLocalizedString(@"Versions",@"Installations status: Multiple other copies are installed; this copy is not installed.");
 		
-		NSString *versionList = [NSString stringWithFormat:@"%@ %@ and %@ are enabled.",
+		NSString *versionList = [NSString stringWithFormat:
+			NSLocalizedString(@"%@ %@ and %@ are enabled.",@"Installation status: Master text for a list of other enabled versions."),
 			versionListPrefix,
 			[enabledVersionsExceptLast componentsJoinedByString:@", "],
 			lastVersion];
@@ -121,16 +129,16 @@
 	[installOrRemoveButton setEnabled:YES];
 
 	if (self.plugin.installed) {
-		[installOrRemoveButton setTitle:@"Remove"];				
+		[installOrRemoveButton setTitle:NSLocalizedString(@"Remove",@"Window button label: remove")];				
 		[enableOrDisableButton setHidden:NO];
 		[enableOrDisableButton setEnabled:YES];
 		if (self.plugin.enabled) {
-			[enableOrDisableButton setTitle:@"Disable"];
+			[enableOrDisableButton setTitle:NSLocalizedString(@"Disable",@"Window button label: disable")];
 		} else {
-			[enableOrDisableButton setTitle:@"Enable"];		
+			[enableOrDisableButton setTitle:NSLocalizedString(@"Enable",@"Window button label: enable")];		
 		}
 	} else {
-		[installOrRemoveButton setTitle:@"Install"];
+		[installOrRemoveButton setTitle:NSLocalizedString(@"Install",@"Window button label: install")];
 		[enableOrDisableButton setHidden:YES];
 	}
 	[installOrRemoveButton setNeedsDisplay];

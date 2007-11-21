@@ -24,12 +24,14 @@
 {
 	// Step 0: validate
 	if (! bundle.installed) {
-		*error = [Installer errorWithMessage:@"This plugin isn't installed."];
+		*error = [Installer errorWithMessage:
+			NSLocalizedString(@"This plugin isn't installed.",@"Install error (trying to enable): Can't enable a bundle that isn't installed.")];
 		return NO;
 	}
 
 	if (bundle.enabled) {
-		*error = [Installer errorWithMessage:@"This plugin is already enabled."];
+		*error = [Installer errorWithMessage:
+			NSLocalizedString(@"This plugin is already enabled.",@"Install error (trying to enable): Already enabled")];
 		return NO;
 	}
 
@@ -38,7 +40,8 @@
 	NSString *bundlesDir = [Installer findOrCreateBundlesDirectoryForDomain:bundle.domain error:&bundleDirError];
 	if (bundlesDir == nil) {
 		*error = (bundleDirError == nil) ?
-			[Installer errorWithMessage:@"Couldn't find or create the Bundles directory."]
+			[Installer errorWithMessage:
+				NSLocalizedString(@"Couldn't find or create the Bundles directory.",@"Install error (trying to enable): No Mail/Bundles dir")]
 			: bundleDirError;
 		NSLog(@"Failed, because we couldn't find or create the Bundles directory.");
 		return NO;
@@ -48,7 +51,7 @@
 	// Step 2: Get our source item
 	if (! [Installer mailbundleExistsAtPath:bundle.path]) {
 		*error = [Installer errorWithMessage:[NSString 
-			stringWithFormat:@"Couldn't find the plugin to enable at: %@", bundle.path]];
+			stringWithFormat:NSLocalizedString(@"Couldn't find the plugin to enable at: %@",@"Install error (trying to enable): Can't find the file to copy"), bundle.path]];
 		NSLog(@"Failed, because we couldn't find the plugin to enable.");
 		return NO;
 	}	
@@ -58,7 +61,7 @@
 	NSError *deleteExistingError = nil;
 	if (! [Installer deleteIfReplacing:destinationPath replacing:replacing error:&deleteExistingError]) {
 		*error = (deleteExistingError == nil) ?
-			[Installer errorWithMessage:@"An existing bundle is present that we wouldn't or couldn't remove."]
+			[Installer errorWithMessage:NSLocalizedString(@"An existing bundle is present that we wouldn't or couldn't remove.",@"Install error (trying to enable): Can't remove an existing plugin")]
 			: deleteExistingError;
 		NSLog(@"Failed, because an existing bundle is present that we wouldn't or couldn't remove.");
 		return NO;
@@ -68,7 +71,7 @@
 	NSError *moveError = nil;
 	if (! [Installer moveBundleAtPath:bundle.path toPath:destinationPath error:&moveError]) {
 		*error = (moveError == nil) ?
-			[Installer errorWithMessage:@"Failed to move the plugin."]
+			[Installer errorWithMessage:NSLocalizedString(@"Failed to move the plugin.",@"Install error (trying to enable): Couldn't move the file from disabled to enabled folder")]
 			: moveError;
 		NSLog(@"Failed to move the bundle.");
 		return NO;
@@ -82,11 +85,11 @@
 {
 	// Step 0: validate
 	if (! bundle.installed) {
-		*error = [Installer errorWithMessage:@"This plugin isn't installed."];
+		*error = [Installer errorWithMessage:NSLocalizedString(@"This plugin isn't installed.",@"Install error (trying to disable)")];
 		return NO;
 	}
 	if (! bundle.enabled) {
-		*error = [Installer errorWithMessage:@"This plugin is already disabled."];
+		*error = [Installer errorWithMessage:NSLocalizedString(@"This plugin is already disabled.",@"Install error (trying to disable)")];
 		return NO;
 	}
 
@@ -95,7 +98,7 @@
 	NSString *bundlesDir = [Installer findOrCreateDisabledBundlesDirectoryForDomain:bundle.domain error:&bundleDirError];
 	if (bundlesDir == nil) {
 		*error = (bundleDirError == nil) ?
-			[Installer errorWithMessage:@"Couldn't find or create the Disabled Bundles directory."]
+			[Installer errorWithMessage:NSLocalizedString(@"Couldn't find or create the Disabled Bundles directory.",@"Install error (trying to disable)")]
 			: bundleDirError;
 		NSLog(@"Failed, because we couldn't find or create the Disabled Bundles directory.");
 		return NO;
@@ -105,7 +108,7 @@
 	// Step 2: Get our source item
 	if (! [Installer mailbundleExistsAtPath:bundle.path]) {
 		*error = [Installer errorWithMessage:[NSString 
-			stringWithFormat:@"Couldn't find the plugin to disable at: %@", bundle.path]];
+			stringWithFormat:NSLocalizedString(@"Couldn't find the plugin to disable at: %@",@"Install error (trying to disable)"), bundle.path]];
 		NSLog(@"Failed, because we couldn't find the plugin to disable.");
 		return NO;
 	}	
@@ -115,7 +118,7 @@
 	NSError *deleteExistingError = nil;
 	if (! [Installer deleteIfReplacing:destinationPath replacing:replacing error:&deleteExistingError]) {
 		*error = (deleteExistingError == nil) ?
-			[Installer errorWithMessage:@"An existing bundle is present that we wouldn't or couldn't remove."]
+			[Installer errorWithMessage:NSLocalizedString(@"An existing bundle is present that we wouldn't or couldn't remove.",@"Install error (trying to disable)")]
 			: deleteExistingError;
 		NSLog(@"Failed, because an existing bundle is present that we wouldn't or couldn't remove.");
 		return NO;
@@ -125,7 +128,7 @@
 	NSError *moveError = nil;
 	if (! [Installer moveBundleAtPath:bundle.path toPath:destinationPath error:&moveError]) {
 		*error = (moveError == nil) ?
-			[Installer errorWithMessage:@"Failed to move the plugin."]
+			[Installer errorWithMessage:NSLocalizedString(@"Failed to move the plugin.",@"Install error (trying to disable)")]
 			: moveError;
 		NSLog(@"Failed to move the bundle.");
 		return NO;
@@ -151,7 +154,7 @@
 	NSString *bundlesDir = [Installer findOrCreateBundlesDirectoryForDomain:domain error:&bundleDirError];
 	if (bundlesDir == nil) {
 		*error = (bundleDirError == nil) ?
-			[Installer errorWithMessage:@"Couldn't find or create the Bundles directory."]
+			[Installer errorWithMessage:NSLocalizedString(@"Couldn't find or create the Bundles directory.",@"Install error (trying to install)")]
 			: bundleDirError;
 		NSLog(@"Failed, because we couldn't find or create the Bundles directory.");
 		return NO;
@@ -161,7 +164,7 @@
 	// Step 2: Get our source item
 	if (! [Installer mailbundleExistsAtPath:bundle.path]) {
 		*error = [Installer errorWithMessage:[NSString 
-			stringWithFormat:@"Couldn't find the plugin to install at: %@", bundle.path]];
+			stringWithFormat:NSLocalizedString(@"Couldn't find the plugin to install at: %@",@"Install error (trying to install)"), bundle.path]];
 		NSLog(@"Failed, because we couldn't find the plugin to install.");
 		return NO;
 	}	
@@ -171,7 +174,7 @@
 	NSError *deleteExistingError = nil;
 	if (! [Installer deleteIfReplacing:destinationPath replacing:replacing error:&deleteExistingError]) {
 		*error = (deleteExistingError == nil) ?
-			[Installer errorWithMessage:@"An existing bundle is present that we wouldn't or couldn't remove."]
+			[Installer errorWithMessage:NSLocalizedString(@"An existing bundle is present that we wouldn't or couldn't remove.",@"Install error (trying to install)")]
 			: deleteExistingError;
 		NSLog(@"Failed, because an existing bundle is present that we wouldn't or couldn't remove.");
 		return NO;
@@ -181,7 +184,7 @@
 	NSError *copyError = nil;
 	if (! [Installer copyBundleAtPath:bundle.path toPath:destinationPath error:&copyError]) {
 		*error = (copyError == nil) ?
-			[Installer errorWithMessage:@"Failed to copy the  bundle."]
+			[Installer errorWithMessage:NSLocalizedString(@"Failed to copy the  bundle.",@"Install error (trying to install)")]
 			: copyError;
 		NSLog(@"Failed to copy the  bundle.");
 		return NO;
@@ -197,7 +200,7 @@
 	// Step 1: Get our source item
 	if (! [Installer mailbundleExistsAtPath:bundle.path]) {
 		*error = [Installer errorWithMessage:[NSString 
-			stringWithFormat:@"Couldn't find the plugin to remove at: %@", bundle.path]];
+			stringWithFormat:NSLocalizedString(@"Couldn't find the plugin to remove at: %@", @"Install error (trying to remove)"),bundle.path]];
 		NSLog(@"Failed, because we couldn't find the plugin to remove.");
 		return NO;
 	}
@@ -209,7 +212,7 @@
 		return YES;
 	} else {
 		*error = (trashError == nil) ?
-			[Installer errorWithMessage:@"Failed to trash the bundle (for an unknown reason)."]
+			[Installer errorWithMessage:NSLocalizedString(@"Failed to trash the bundle (for an unknown reason).",@"Install error (trying to remove)")]
 			: trashError;
 		return NO;
 	}
@@ -274,7 +277,7 @@
 	BOOL success = [fileManager copyItemAtPath:sourcePath toPath:destinationPath error:&copyItemError];
 	if (! success) {
 		*error = (copyItemError == nil) ?
-			[Installer errorWithMessage:@"Failed to copy the bundle (for an unknown reason)."]
+			[Installer errorWithMessage:NSLocalizedString(@"Failed to copy the bundle (for an unknown reason).",@"Install error (generic copy error message)")]
 			: copyItemError;
 	}
 	return success;
@@ -287,7 +290,7 @@
 	BOOL success = [fileManager moveItemAtPath:sourcePath toPath:destinationPath error:&moveItemError];
 	if (! success) {
 		*error = (moveItemError == nil) ?
-			[Installer errorWithMessage:@"Failed to move the bundle (for an unknown reason)."]
+			[Installer errorWithMessage:NSLocalizedString(@"Failed to move the bundle (for an unknown reason).",@"Install error (generic move error message)")]
 			: moveItemError;
 	}
 	return success;
@@ -310,12 +313,12 @@
 				return YES;
 			} else {
 				*error = (removeExistingError == nil) ?
-					[Installer errorWithMessage:@"Failed to remove existing bundle."]
+					[Installer errorWithMessage:NSLocalizedString(@"Failed to remove existing bundle.",@"Install error (trying to remove an existing mailbundle)")]
 					: removeExistingError;
 				return NO;
 			}
 		} else {
-			*error = [Installer errorWithMessage:@"A plugin already exists, and we've been asked not to replace existing items."];
+			*error = [Installer errorWithMessage:NSLocalizedString(@"A plugin already exists, and we've been asked not to replace existing items.",@"Install error (trying to remove an existing mailbundle)")];
 			NSLog(@"A file exists and we're not replacing.");
 			return NO;
 		}		
@@ -338,7 +341,7 @@
 	
 	if (fullpath == nil) {
 		NSLog(@"Failed, because we didn't get an appropriate Library directory.");
-		*error = [Installer errorWithMessage:@"Failed, because we didn't get an appropriate Library directory."];
+		*error = [Installer errorWithMessage:NSLocalizedString(@"Failed, because we didn't get an appropriate Library directory.",@"Install error (trying to locate Library directory)")];
 		return nil;
 	}
 
@@ -351,7 +354,7 @@
 			return fullpath;
 		} else {
 			*error = [Installer errorWithMessage:
-				[NSString stringWithFormat:@"Failed to create the subdirectory '%@', because there's an existing file there.",fullpath]];
+				[NSString stringWithFormat:NSLocalizedString(@"Failed to create the subdirectory '%@', because there's an existing file there.",@"Install error (trying to create Library/Bundles directory)"),fullpath]];
 			NSLog(@"Failed, because there's a *file* (rather than a directory) at %@",fullpath);
 			return nil;			
 		}
@@ -363,7 +366,7 @@
 		} else {
 			NSLog(@"Failed, because we couldn't create the subdirectory.");
 			*error = [Installer errorWithMessage:
-				[NSString stringWithFormat:@"Failed to create the subdirectory '%@' for an unknown reason. Check permissions?",fullpath]];
+				[NSString stringWithFormat:NSLocalizedString(@"Failed to create the subdirectory '%@' for an unknown reason. Check permissions?",@"Install error (trying to create Library/Bundles directory)"),fullpath]];
 			return nil;
 		}
 	}

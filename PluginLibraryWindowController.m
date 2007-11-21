@@ -96,26 +96,24 @@ enum LibraryMenuItems {
 	// Decide what text and icon to show for the enable/disable button.
 	int enabledCount = 0;
 	int selectedCount = [selected count];
-	NSLog(@"Changed selection. Have %d selected", selectedCount);
 	for (Mailbundle *bundle in selected) {
 		if ([bundle respondsToSelector:@selector(enabled)])
 			if (bundle.enabled)
 				enabledCount++;
 	}
-	NSLog(@"Have %d enabled of %d selected", enabledCount, selectedCount);
 	
 	if (selectedCount == 0) {
-		[enableDisableItem setLabel:@"Disable"];
+		[enableDisableItem setLabel:NSLocalizedString(@"Disable",@"Toolbar button label: disable")];
 		[enableDisableItem setImage:[NSImage imageNamed:@"Pause"]];
 	} else {
 		if (enabledCount == 0) {
-			[enableDisableItem setLabel:@"Enable"];
+			[enableDisableItem setLabel:NSLocalizedString(@"Enable",@"Toolbar button label: enable")];
 			[enableDisableItem setImage:[NSImage imageNamed:@"Play"]];
 		} else if (enabledCount == selectedCount) {
-			[enableDisableItem setLabel:@"Disable"];
+			[enableDisableItem setLabel:NSLocalizedString(@"Disable",@"Toolbar button label: disable")];
 			[enableDisableItem setImage:[NSImage imageNamed:@"Pause"]];
 		} else {
-			[enableDisableItem setLabel:@"Enable / Disable"];
+			[enableDisableItem setLabel:NSLocalizedString(@"Enable / Disable",@"Toolbar button label: mixed enable/disable")];
 			[enableDisableItem setImage:[NSImage imageNamed:@"PausePlay"]];
 		}	
 	}

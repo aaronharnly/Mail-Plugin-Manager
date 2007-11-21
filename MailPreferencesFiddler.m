@@ -22,7 +22,7 @@
 	NSError *enableError = nil;
 	if (! [MailPreferencesFiddler enableMailbundlesForVersion:3 error:&enableError]) {
 		*error = (enableError == nil) ?
-			[MailPreferencesFiddler errorWithMessage:@"Couldn't enable Mailbundles."]
+			[MailPreferencesFiddler errorWithMessage:NSLocalizedString(@"Couldn't enable Mailbundles.",@"Preferences error (trying to enable Mailbundles)")]
 			: enableError;
 		return NO;
 	}
@@ -34,14 +34,14 @@
 	NSError *enableError = nil;
 	if (! [MailPreferencesFiddler setMailbundlesEnabled:YES error:error] ) {
 		*error = (enableError == nil) ?
-			[MailPreferencesFiddler errorWithMessage:@"Couldn't enable Mailbundles."]
+			[MailPreferencesFiddler errorWithMessage:NSLocalizedString(@"Couldn't enable Mailbundles.",@"Preferences error (trying to enable Mailbundles)")]
 			: enableError;	
 		return NO;
 	}
 	NSError *compatabilityError = nil;
 	if (! [MailPreferencesFiddler setBundleCompatability:[NSNumber numberWithInt:version] error:&compatabilityError] ) {
 		*error = (compatabilityError == nil) ?
-			[MailPreferencesFiddler errorWithMessage:@"Couldn't set the Mailbundle compatability level."]
+			[MailPreferencesFiddler errorWithMessage:NSLocalizedString(@"Couldn't set the Mailbundle compatability level.",@"Preferences error (trying to set Mailbundle compatibility)")]
 			: compatabilityError;	
 		return NO;
 	}
@@ -62,7 +62,7 @@
 		return YES;
 	} else {
 		*error = [MailPreferencesFiddler errorWithMessage:
-			[NSString stringWithFormat:@"Failed to set the %@ preference.", MailbundlesEnabledKey]];
+			[NSString stringWithFormat:NSLocalizedString(@"Failed to set the %@ preference.",@"Preferences error (generic)"), MailbundlesEnabledKey]];
 		return NO;
 	}
 }
@@ -79,7 +79,7 @@
 		return YES;
 	} else {
 		*error = [MailPreferencesFiddler errorWithMessage:
-			[NSString stringWithFormat:@"Failed to set the %@ preference.", MailbundleVersionKey]];
+			[NSString stringWithFormat:NSLocalizedString(@"Failed to set the %@ preference.",@"Preferences error (generic)"), MailbundleVersionKey]];
 		return NO;
 	}	
 }
