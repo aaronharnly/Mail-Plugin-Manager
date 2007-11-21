@@ -68,6 +68,30 @@
 	}
 	return mailbundles;
 }
+-(NSArray *) installedMailbundles
+{
+	return [pluginArrayController arrangedObjects];
+}
+-(NSArray *) installedMailbundlesForIdentifier:(NSString *)identifier
+{
+	NSMutableArray *matches = [NSMutableArray arrayWithCapacity:[[self installedMailbundles] count]];
+	for (Mailbundle *bundle in [self installedMailbundles]) {
+		if ([[bundle identifier] isEqualToString:identifier])
+			[matches addObject:bundle];
+	}
+	return [NSArray arrayWithArray:matches];
+}
+-(NSArray *) enabledMailbundlesForIdentifier:(NSString *)identifier
+{
+	NSArray *installed = [self installedMailbundlesForIdentifier:identifier];	
+	NSMutableArray *matches = [NSMutableArray arrayWithCapacity:[installed count]];
+	for (Mailbundle *bundle in installed) {
+		if ([bundle enabled]) 
+			[matches addObject:bundle];
+	}
+	return [NSArray arrayWithArray:matches];
+}
+
 @synthesize plugins;
 @synthesize pluginArrayController;
 @end

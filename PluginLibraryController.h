@@ -23,4 +23,8 @@
 -(IBAction) loadFromDisk:(id)sender;
 -(IBAction) refresh:(id)sender;
 -(void) refreshMovingPath:(NSString *)oldPath toPath:(NSString *)newPath;
+
+-(NSArray *) installedMailbundles;
+-(NSArray *) installedMailbundlesForIdentifier:(NSString *)identifier;
+-(NSArray *) enabledMailbundlesForIdentifier:(NSString *)identifier;
 @end

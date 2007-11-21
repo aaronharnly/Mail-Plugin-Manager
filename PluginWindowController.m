@@ -13,6 +13,8 @@
 #import "MailbundleOperationController.h"
 #import "MailPluginManagerController.h"
 #import "AlertFactory.h"
+#import "NSArray+CocoaDevUsersAdditions.h"
+#import "PluginLibraryController.h"
 
 @implementation PluginWindowController
 // ------------ NSWindowController methods ---------
@@ -54,6 +56,45 @@
 	return [NSString stringWithFormat:@"This copy of %@ is %@",name, statusText];
 }
 
+- (NSString *)textDescribingInstalledCopiesOfMailbundle:(Mailbundle *)bundle
+{
+	NSArray *enabledCopies = [[[NSApp delegate] pluginLibraryController] enabledMailbundlesForIdentifier:bundle.identifier];
+	int totalEnabledCopies = [enabledCopies count];
+	
+	NSMutableArray *enabledCopiesExcludingThis = [NSMutableArray arrayWithCapacity:totalEnabledCopies];
+	for (Mailbundle *enabledBundle in enabledCopies) {
+		if (! [[enabledBundle path] isEqualToString:[bundle path]]) {
+			[enabledCopiesExcludingThis addObject:enabledBundle];
+			NSLog(@"My path is %@, and this thing is %@", [bundle path], [enabledBundle path]);
+		}
+	}
+	int totalEnabledExcludingThis = [enabledCopiesExcludingThis count];
+	
+	if (totalEnabledCopies == 0) {
+		return [NSString stringWithFormat:@"No copies of %@ are enabled.", [bundle name]];
+	} else if (totalEnabledExcludingThis == 0) {
+		return [NSString stringWithFormat:@"This is the only enabled copy of %@.", [bundle name]];	
+	} else if (totalEnabledExcludingThis == 1) {
+		return [NSString stringWithFormat:@"Version %@ is currently enabled.", [[enabledCopies firstObject] version]];
+	} else {
+		NSMutableArray *enabledVersions = [NSMutableArray arrayWithCapacity:totalEnabledExcludingThis];
+		for (Mailbundle *enabledBundle in enabledCopiesExcludingThis) {
+			[enabledVersions addObject:[enabledBundle version]];
+		}
+		NSString *lastVersion = [enabledVersions lastObject];
+		NSArray *enabledVersionsExceptLast = [enabledVersions arrayByRemovingLastObject];
+		NSString *versionListPrefix = (bundle.enabled) ?
+			@"Other than this copy, versions" :
+			@"Versions";
+		
+		NSString *versionList = [NSString stringWithFormat:@"%@ %@ and %@ are enabled.",
+			versionListPrefix,
+			[enabledVersionsExceptLast componentsJoinedByString:@", "],
+			lastVersion];
+		return versionList;
+	}
+}
+
 /*!
 	@method updateDisplay
 	@abstract Refresh the view.
@@ -71,7 +112,8 @@
 	//	self.window.representedFilename <-> plugin.path
 	[iconView setImage:plugin.icon];
 	[installationStatusField setStringValue:[self textForName:self.plugin.name installed:self.plugin.installed enabled:self.plugin.enabled domain:self.plugin.domain]];
-	[otherCopiesStatusField setStringValue:@"Are there other copies installed? I dunno."];
+	[otherCopiesStatusField setStringValue:[self textDescribingInstalledCopiesOfMailbundle:self.plugin]];
+	NSLog(@"Updated with other-copies value: %@", [self textDescribingInstalledCopiesOfMailbundle:self.plugin]);
 	[self configureButtonsForCurrentInstallationStatus];
 }
 
