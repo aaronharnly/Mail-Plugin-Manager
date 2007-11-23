@@ -27,7 +27,8 @@ enum LibraryMenuItems {
 	LibraryMenuItemEnable = 1,
 	LibraryMenuItemRemove = 2,
 	LibraryMenuItemRefresh = 3,
-	LibraryMenuItemReveal = 4
+	LibraryMenuItemReveal = 4,
+	LibraryMenuItemShowWindow = 9
 };
 
 @implementation PluginLibraryWindowController
@@ -80,6 +81,9 @@ enum LibraryMenuItems {
 			break;
 		case LibraryMenuItemReveal:
 			return atLeastOneSelected;
+			break;
+		case LibraryMenuItemShowWindow:
+			return YES;
 			break;
 		default:
 			return NO;
