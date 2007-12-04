@@ -28,6 +28,8 @@
 		93A24BA90CF3A62A00C7026C /* FSEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A24BA80CF3A62A00C7026C /* FSEventsController.m */; };
 		93A24BC90CF3A77A00C7026C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A24BC80CF3A77A00C7026C /* CoreServices.framework */; };
 		93B2564F0CF4D97C00600F29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93B2564E0CF4D97C00600F29 /* Localizable.strings */; };
+		93C299FE0D0552930007FDCE /* MailAppOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C299FD0D0552930007FDCE /* MailAppOperations.m */; };
+		93C29A3E0D0557960007FDCE /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C29A3D0D0557960007FDCE /* ScriptingBridge.framework */; };
 		93D000040CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D000030CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m */; };
 		93D0002F0CECAA21007705DB /* InstallationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D0002E0CECAA21007705DB /* InstallationStatus.m */; };
 		93D0FDF40CEB75D5007705DB /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0FDE80CEB75D5007705DB /* delete.png */; };
@@ -86,6 +88,10 @@
 		93A24BA80CF3A62A00C7026C /* FSEventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEventsController.m; sourceTree = "<group>"; };
 		93A24BC80CF3A77A00C7026C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		93B2564E0CF4D97C00600F29 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		93C299FC0D0552930007FDCE /* MailAppOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailAppOperations.h; sourceTree = "<group>"; };
+		93C299FD0D0552930007FDCE /* MailAppOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailAppOperations.m; sourceTree = "<group>"; };
+		93C29A020D05566A0007FDCE /* Mail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mail.h; sourceTree = "<group>"; };
+		93C29A3D0D0557960007FDCE /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
 		93D000020CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CocoaDevUsersAdditions.h"; sourceTree = "<group>"; };
 		93D000030CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CocoaDevUsersAdditions.m"; sourceTree = "<group>"; };
 		93D0002E0CECAA21007705DB /* InstallationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstallationStatus.m; sourceTree = "<group>"; };
@@ -118,6 +124,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				93A24BC90CF3A77A00C7026C /* CoreServices.framework in Frameworks */,
+				93C29A3E0D0557960007FDCE /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +147,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93C29A3D0D0557960007FDCE /* ScriptingBridge.framework */,
 				93A24BC80CF3A77A00C7026C /* CoreServices.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
@@ -180,6 +188,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				93C29A020D05566A0007FDCE /* Mail.h */,
 				32CA4F630368D1EE00C91783 /* MailPluginManager_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -252,6 +261,8 @@
 				9338DFD50CE8EF9000CAEC13 /* MailPreferencesFiddler.m */,
 				9338E0770CE9128400CAEC13 /* MailbundleOperations.h */,
 				9338E0780CE9128400CAEC13 /* MailbundleOperations.m */,
+				93C299FC0D0552930007FDCE /* MailAppOperations.h */,
+				93C299FD0D0552930007FDCE /* MailAppOperations.m */,
 			);
 			name = Processors;
 			sourceTree = "<group>";
@@ -425,6 +436,7 @@
 				93A249E90CF373BB00C7026C /* MailbundleOperationController.m in Sources */,
 				93A24A440CF37A3300C7026C /* MailbundleUIUpdater.m in Sources */,
 				93A24BA90CF3A62A00C7026C /* FSEventsController.m in Sources */,
+				93C299FE0D0552930007FDCE /* MailAppOperations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

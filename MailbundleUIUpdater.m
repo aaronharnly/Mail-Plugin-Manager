@@ -13,6 +13,7 @@
 #import "PluginLibraryController.h"
 #import "Constants.h"
 #import "Mailbundle.h"
+#import "MailAppOperations.h"
 
 @implementation MailbundleUIUpdater
 - (void)awakeFromNib
@@ -77,7 +78,12 @@
 
 - (void) pluginAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo 
 {
+	BOOL isMailRelaunchAlert = ([[alert buttons] count] == 2);
 	[[alert window] orderOut:self];
+	if (isMailRelaunchAlert && returnCode == NSAlertFirstButtonReturn) {
+		BOOL success = [MailAppOperations relaunchMail];
+		NSLog(@"Success relaunching: %d", success);
+	}
 }
 
 // Notifications
@@ -90,6 +96,7 @@
 	// If there was a problem, put an error up on the sending window
 	BOOL success = [[[notification userInfo] objectForKey:MailbundleOperationSuccessKey] boolValue];
 	// We also show messages for successful installations and removals
+	// We'll keep enable/disable operations quiet, for now.
 	if ( (! success)
 	|| ([operation isEqualToString:MailbundleInstalledNotification])
 	|| ([operation isEqualToString:MailbundleRemovedNotification]))
