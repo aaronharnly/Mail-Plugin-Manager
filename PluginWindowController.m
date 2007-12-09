@@ -121,7 +121,6 @@
 	[iconView setImage:plugin.icon];
 	[installationStatusField setStringValue:[self textForName:self.plugin.name installed:self.plugin.installed enabled:self.plugin.enabled domain:self.plugin.domain]];
 	[otherCopiesStatusField setStringValue:[self textDescribingInstalledCopiesOfMailbundle:self.plugin]];
-	NSLog(@"Updated with other-copies value: %@", [self textDescribingInstalledCopiesOfMailbundle:self.plugin]);
 	[self configureButtonsForCurrentInstallationStatus];
 }
 

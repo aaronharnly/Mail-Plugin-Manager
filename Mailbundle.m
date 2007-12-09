@@ -134,8 +134,11 @@
 	path = newPath;
 	self.bundle = [NSBundle bundleWithPath:path];
 	self.name = [self.bundle objectForInfoDictionaryKey:@"CFBundleName"];
+	if (self.name == nil)
+		self.name = [[newPath lastPathComponent] stringByDeletingPathExtension];
 	self.identifier = [self.bundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-	self.version = [self.bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+	self.buildVersion = [self.bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+	self.version = [self.bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
 	self.bundleDescription = [self.bundle objectForInfoDictionaryKey:@"BundleDescription"];
 	self.icon = [[NSWorkspace sharedWorkspace] iconForFile:self.path];
 	InstallationStatus *newStatus = [Mailbundle getInstallationStatusForPath:path];
@@ -151,6 +154,7 @@
 @synthesize path;
 @synthesize name;
 @synthesize identifier;
+@synthesize buildVersion;
 @synthesize version;
 @synthesize bundleDescription;
 @synthesize icon;

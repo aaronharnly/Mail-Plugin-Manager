@@ -13,6 +13,7 @@
 	NSString *path;
 	NSString *name;
 	NSString *identifier;
+	NSString *buildVersion;
 	NSString *version;
 	NSString *bundleDescription;
 	NSImage *icon;
@@ -31,6 +32,7 @@
 @property (copy) NSString *path;
 @property (copy) NSString *name;
 @property (copy) NSString *identifier;
+@property (copy) NSString *buildVersion;
 @property (copy) NSString *version;
 @property (copy) NSString *bundleDescription;
 @property (assign) NSImage *icon;

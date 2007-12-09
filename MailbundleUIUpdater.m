@@ -27,11 +27,11 @@
 }
 
 // Alert management
-- (void) displayAlertForMailbundle:(Mailbundle *)bundle window:(NSWindow *)window success:(BOOL)success error:(NSError *)error successMessage:(NSString *)successMessage successInfo:(NSString *)successInfo failureMessage:(NSString *)failureMessage
+- (void) displayAlertForMailbundle:(Mailbundle *)bundle window:(NSWindow *)window success:(BOOL)success error:(NSError *)error successMessage:(NSString *)successMessage successInfo:(NSString *)successInfo failureMessage:(NSString *)failureMessage operation:(NSString *)operation
 {
 	// Display an alert appropriate to the result
 	NSAlert *alert = [AlertFactory alertForPlugin:bundle success:success error:error successMessage:successMessage successInfo:successInfo failureMessage:failureMessage];
-	[alert beginSheetModalForWindow:window modalDelegate:self didEndSelector:@selector(pluginAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	[alert beginSheetModalForWindow:window modalDelegate:self didEndSelector:@selector(pluginAlertDidEnd:returnCode:contextInfo:) contextInfo:operation];
 }
 
 - (void) displayAlertForNotification:(NSNotification *)notification
@@ -55,7 +55,7 @@
 	} else if ([operation isEqualToString:MailbundleRemovedNotification]) {
 		successMessage = [NSString stringWithFormat:
 			NSLocalizedString(@"Successfully removed %@",@"Removal message: success"), [bundle name]];
-		successInfo = NSLocalizedString(@"It will be absent when you next launch Mail. You can retrieve it from the Trash if you change your mind.",@"Removal message: success info");
+			successInfo = NSLocalizedString(@"It will be absent when you next launch Mail. You can retrieve it from the Trash if you change your mind.",@"Removal message: success info");
 		failureMessage = [NSString stringWithFormat:
 			NSLocalizedString(@"Failed to remove %@",@"Removal message: failure"), [bundle name]];	
 	} else if ([operation isEqualToString:MailbundleEnabledNotification]) {
@@ -72,18 +72,22 @@
 			NSLocalizedString(@"Failed to disable %@",@"Disable message: failure (not used)"), [bundle name]];	
 	}
 
-	[self displayAlertForMailbundle:bundle window:window success:success error:error successMessage:successMessage successInfo:successInfo failureMessage:failureMessage];
+	[self displayAlertForMailbundle:bundle window:window success:success error:error successMessage:successMessage successInfo:successInfo failureMessage:failureMessage operation:operation];
 	
 }
 
 - (void) pluginAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo 
 {
+	NSString *operation = contextInfo;
 	BOOL isMailRelaunchAlert = ([[alert buttons] count] == 2);
 	[[alert window] orderOut:self];
 	if (isMailRelaunchAlert && returnCode == NSAlertFirstButtonReturn) {
 		BOOL success = [MailAppOperations relaunchMail];
 		NSLog(@"Success relaunching: %d", success);
 	}
+	if ([operation isEqualToString:MailbundleInstalledNotification] && 
+		[[NSApp delegate] shouldQuitAfterInstall])
+			[NSApp terminate:self];
 }
 
 // Notifications
@@ -145,7 +149,7 @@
 			Mailbundle *bundle = [controller plugin];
 			NSString *lostMessage = [NSString stringWithFormat:
 				NSLocalizedString(@"%@ has been moved from its previous location by another application.",@"Alert when a mailbundle has been moved by another application."), [bundle name]];
-			[self displayAlertForMailbundle:bundle window:[controller window] success:NO error:nil successMessage:@"" successInfo:@"" failureMessage:lostMessage];
+			[self displayAlertForMailbundle:bundle window:[controller window] success:NO error:nil successMessage:@"" successInfo:@"" failureMessage:lostMessage operation:nil];
 		} 
 	}
 

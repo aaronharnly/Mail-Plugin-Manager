@@ -19,6 +19,8 @@
 	IBOutlet MailbundleOperationController *operationController;
 	IBOutlet MailbundleUIUpdater *uiUpdater;
 	IBOutlet FSEventsController *fsEventsController;
+	BOOL applicationDidLaunch;
+	BOOL shouldQuitAfterInstall;
 }
 -(IBAction)openDocumentPanel:(id)sender;
 -(void)openDocumentPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo;
@@ -27,4 +29,5 @@
 @property (readonly) MailbundleOperationController *operationController;
 @property (readonly) PluginLibraryController *pluginLibraryController;
 @property (readonly) NSMutableDictionary *pluginWindowControllers;
+@property (readonly) BOOL shouldQuitAfterInstall;
 @end

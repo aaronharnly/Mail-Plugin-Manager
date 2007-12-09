@@ -19,6 +19,8 @@
 	self = [super init];
 	if (self != nil) {
 		pluginWindowControllers = [NSMutableDictionary dictionaryWithCapacity:4];
+		applicationDidLaunch = NO;
+		shouldQuitAfterInstall = NO;
 	}
 	return self;
 }
@@ -26,6 +28,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	[fsEventsController registerForFSEvents];
+	applicationDidLaunch = YES;
 }
 
 // --------------------- Custom methods -------------------------
@@ -76,10 +79,16 @@
 @synthesize operationController;
 @synthesize pluginLibraryController;
 @synthesize pluginWindowControllers;
+@synthesize shouldQuitAfterInstall;
 
 // --------------------- NSApplication delegate methods -------------------------
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
+	// If we're asked to open a file before we've finished launching, we should
+	// quit immediately after completing an install
+	if (! applicationDidLaunch)
+		shouldQuitAfterInstall = YES;
+	
 	// If we already have a window open for this, just activate that window
 	PluginWindowController *existingController = [pluginWindowControllers objectForKey:filename];
 	if (existingController != nil) {

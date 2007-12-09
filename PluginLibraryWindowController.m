@@ -18,7 +18,8 @@ enum LibraryToolbarItems {
 	LibraryToolbarItemEnable = 1,
 	LibraryToolbarItemRemove = 2,
 	LibraryToolbarItemRefresh = 3,
-	LibraryToolbarItemReveal = 4
+	LibraryToolbarItemReveal = 4,
+	LibraryToolbarItemGetInfo = 5
 };
 
 
@@ -56,6 +57,9 @@ enum LibraryMenuItems {
 			return YES;
 			break;
 		case LibraryToolbarItemReveal:
+			return atLeastOneSelected;
+			break;
+		case LibraryToolbarItemGetInfo:
 			return atLeastOneSelected;
 			break;
 		default:
@@ -134,6 +138,14 @@ enum LibraryMenuItems {
 	int clickedRow = [sender clickedRow];
 	if (clickedRow >= 0) {
 		Mailbundle *bundle = [[[pluginLibraryController pluginArrayController] arrangedObjects] objectAtIndex:clickedRow];
+		[[NSApp delegate] application:NSApp openFile:bundle.path];
+	}
+}
+
+-(IBAction) openSelection:(id) sender
+{
+	NSArray *selected = [[pluginLibraryController pluginArrayController] selectedObjects];
+	for (Mailbundle *bundle in selected) {
 		[[NSApp delegate] application:NSApp openFile:bundle.path];
 	}
 }

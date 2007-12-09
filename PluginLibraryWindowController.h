@@ -16,6 +16,7 @@
 	IBOutlet NSTableView *tableView;
 }
 -(IBAction) openRow:(id) sender;
+-(IBAction) openSelection:(id) sender;
 -(IBAction) refreshListing:(id) sender;
 -(IBAction) enableOrDisableSelection:(id) sender;
 -(IBAction) enableOrDisableRow:(id) sender;
