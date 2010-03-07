@@ -10,12 +10,17 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		932F32CC1144395A007290E2 /* PluginLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 932F32CB1144395A007290E2 /* PluginLibrary.m */; };
 		9338DFD30CE8ECF200CAEC13 /* PluginLibraryWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338DFD20CE8ECF200CAEC13 /* PluginLibraryWindowController.m */; };
 		9338DFD60CE8EF9000CAEC13 /* MailPreferencesFiddler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338DFD50CE8EF9000CAEC13 /* MailPreferencesFiddler.m */; };
 		9338E0790CE9128400CAEC13 /* MailbundleOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E0780CE9128400CAEC13 /* MailbundleOperations.m */; };
 		9338E2600CEA4E6400CAEC13 /* TransparentImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E25F0CEA4E6400CAEC13 /* TransparentImageView.m */; };
 		9338E2960CEA5F4B00CAEC13 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E2950CEA5F4B00CAEC13 /* Constants.m */; };
 		9338E3430CEA6A6700CAEC13 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9338E3420CEA6A6700CAEC13 /* Utilities.m */; };
+		9354C76E1144125400F16F6D /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9354C76D1144125400F16F6D /* BWToolkitFramework.framework */; };
+		9354C7BF1144169D00F16F6D /* BWToolkitFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9354C76D1144125400F16F6D /* BWToolkitFramework.framework */; };
+		9354C8081144267A00F16F6D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9354C8071144267A00F16F6D /* Sparkle.framework */; };
+		9354C80B1144268F00F16F6D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9354C8071144267A00F16F6D /* Sparkle.framework */; };
 		937386780CE52186007EFB20 /* MailPluginManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 937386770CE52186007EFB20 /* MailPluginManagerController.m */; };
 		9373867C0CE521C8007EFB20 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9373867A0CE521C8007EFB20 /* MainMenu.xib */; };
 		9373867F0CE52255007EFB20 /* PluginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9373867E0CE52255007EFB20 /* PluginWindow.xib */; };
@@ -46,6 +51,21 @@
 		93E253A20CEE312F00D9525A /* AlertFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E253A10CEE312F00D9525A /* AlertFactory.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9354C7FA114416A900F16F6D /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9354C80B1144268F00F16F6D /* Sparkle.framework in Copy Frameworks */,
+				9354C7BF1144169D00F16F6D /* BWToolkitFramework.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -55,7 +75,9 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* MailPluginManager_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailPluginManager_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* MailPluginManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MailPluginManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Mail Plugin Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mail Plugin Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		932F32CA1144395A007290E2 /* PluginLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginLibrary.h; sourceTree = "<group>"; };
+		932F32CB1144395A007290E2 /* PluginLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginLibrary.m; sourceTree = "<group>"; };
 		9338DFD10CE8ECF200CAEC13 /* PluginLibraryWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginLibraryWindowController.h; sourceTree = "<group>"; };
 		9338DFD20CE8ECF200CAEC13 /* PluginLibraryWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginLibraryWindowController.m; sourceTree = "<group>"; };
 		9338DFD40CE8EF9000CAEC13 /* MailPreferencesFiddler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailPreferencesFiddler.h; sourceTree = "<group>"; };
@@ -69,6 +91,8 @@
 		9338E3410CEA6A6700CAEC13 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		9338E3420CEA6A6700CAEC13 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		9338E38A0CEA7B2300CAEC13 /* InstallationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstallationStatus.h; sourceTree = "<group>"; };
+		9354C76D1144125400F16F6D /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = frameworks/BWToolkitFramework.framework; sourceTree = "<group>"; };
+		9354C8071144267A00F16F6D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		937386760CE52186007EFB20 /* MailPluginManagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailPluginManagerController.h; sourceTree = "<group>"; };
 		937386770CE52186007EFB20 /* MailPluginManagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailPluginManagerController.m; sourceTree = "<group>"; };
 		9373867B0CE521C8007EFB20 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -125,6 +149,8 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				93A24BC90CF3A77A00C7026C /* CoreServices.framework in Frameworks */,
 				93C29A3E0D0557960007FDCE /* ScriptingBridge.framework in Frameworks */,
+				9354C76E1144125400F16F6D /* BWToolkitFramework.framework in Frameworks */,
+				9354C8081144267A00F16F6D /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,12 +160,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				937386740CE52165007EFB20 /* Models */,
-				937386710CE52161007EFB20 /* Views */,
-				9373868B0CE52365007EFB20 /* ViewControllers */,
-				93D0FFA60CEBB866007705DB /* ModelControllers */,
-				937386750CE5216A007EFB20 /* AppControllers */,
-				937386870CE52333007EFB20 /* Processors */,
+				937386740CE52165007EFB20 /* model */,
+				937386710CE52161007EFB20 /* view */,
+				9373868B0CE52365007EFB20 /* viewcontroller */,
+				93D0FFA60CEBB866007705DB /* modelcontroller */,
+				937386750CE5216A007EFB20 /* appcontroller */,
+				937386870CE52333007EFB20 /* processor */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -150,6 +176,8 @@
 				93C29A3D0D0557960007FDCE /* ScriptingBridge.framework */,
 				93A24BC80CF3A77A00C7026C /* CoreServices.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				9354C76D1144125400F16F6D /* BWToolkitFramework.framework */,
+				9354C8071144267A00F16F6D /* Sparkle.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -167,7 +195,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* MailPluginManager.app */,
+				8D1107320486CEB800E47090 /* Mail Plugin Manager.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,27 +203,28 @@
 		29B97314FDCFA39411CA2CEA /* MailPluginManager */ = {
 			isa = PBXGroup;
 			children = (
-				93D0FE2B0CEB886F007705DB /* Categories */,
+				93D0FE2B0CEB886F007705DB /* categories */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97315FDCFA39411CA2CEA /* main */,
+				29B97317FDCFA39411CA2CEA /* resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = MailPluginManager;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+		29B97315FDCFA39411CA2CEA /* main */ = {
 			isa = PBXGroup;
 			children = (
 				93C29A020D05566A0007FDCE /* Mail.h */,
 				32CA4F630368D1EE00C91783 /* MailPluginManager_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
-			name = "Other Sources";
+			name = main;
+			path = src/main;
 			sourceTree = "<group>";
 		};
-		29B97317FDCFA39411CA2CEA /* Resources */ = {
+		29B97317FDCFA39411CA2CEA /* resources */ = {
 			isa = PBXGroup;
 			children = (
 				93B2564C0CF4D95F00600F29 /* Localizable */,
@@ -203,7 +232,7 @@
 				93D0FDE70CEB75D5007705DB /* Icons */,
 				9373869A0CE52686007EFB20 /* Nibs */,
 			);
-			name = Resources;
+			path = resources;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -215,16 +244,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		937386710CE52161007EFB20 /* Views */ = {
+		937386710CE52161007EFB20 /* view */ = {
 			isa = PBXGroup;
 			children = (
 				9338E25E0CEA4E6400CAEC13 /* TransparentImageView.h */,
 				9338E25F0CEA4E6400CAEC13 /* TransparentImageView.m */,
 			);
-			name = Views;
+			name = view;
+			path = src/view;
 			sourceTree = "<group>";
 		};
-		937386740CE52165007EFB20 /* Models */ = {
+		937386740CE52165007EFB20 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				937386840CE5232C007EFB20 /* Mailbundle.h */,
@@ -235,11 +265,14 @@
 				9338E3420CEA6A6700CAEC13 /* Utilities.m */,
 				9338E38A0CEA7B2300CAEC13 /* InstallationStatus.h */,
 				93D0002E0CECAA21007705DB /* InstallationStatus.m */,
+				932F32CA1144395A007290E2 /* PluginLibrary.h */,
+				932F32CB1144395A007290E2 /* PluginLibrary.m */,
 			);
-			name = Models;
+			name = model;
+			path = src/model;
 			sourceTree = "<group>";
 		};
-		937386750CE5216A007EFB20 /* AppControllers */ = {
+		937386750CE5216A007EFB20 /* appcontroller */ = {
 			isa = PBXGroup;
 			children = (
 				937386760CE52186007EFB20 /* MailPluginManagerController.h */,
@@ -249,10 +282,11 @@
 				93A24BA70CF3A62A00C7026C /* FSEventsController.h */,
 				93A24BA80CF3A62A00C7026C /* FSEventsController.m */,
 			);
-			name = AppControllers;
+			name = appcontroller;
+			path = src/appcontroller;
 			sourceTree = "<group>";
 		};
-		937386870CE52333007EFB20 /* Processors */ = {
+		937386870CE52333007EFB20 /* processor */ = {
 			isa = PBXGroup;
 			children = (
 				937386880CE52354007EFB20 /* Installer.h */,
@@ -264,10 +298,11 @@
 				93C299FC0D0552930007FDCE /* MailAppOperations.h */,
 				93C299FD0D0552930007FDCE /* MailAppOperations.m */,
 			);
-			name = Processors;
+			name = processor;
+			path = src/processor;
 			sourceTree = "<group>";
 		};
-		9373868B0CE52365007EFB20 /* ViewControllers */ = {
+		9373868B0CE52365007EFB20 /* viewcontroller */ = {
 			isa = PBXGroup;
 			children = (
 				937386970CE523B7007EFB20 /* PluginWindowController.h */,
@@ -279,7 +314,8 @@
 				93E253A00CEE312F00D9525A /* AlertFactory.h */,
 				93E253A10CEE312F00D9525A /* AlertFactory.m */,
 			);
-			name = ViewControllers;
+			name = viewcontroller;
+			path = src/viewcontroller;
 			sourceTree = "<group>";
 		};
 		9373869A0CE52686007EFB20 /* Nibs */ = {
@@ -328,7 +364,7 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
-		93D0FE2B0CEB886F007705DB /* Categories */ = {
+		93D0FE2B0CEB886F007705DB /* categories */ = {
 			isa = PBXGroup;
 			children = (
 				93D0FE840CEB91E5007705DB /* NSString+TRAdditions.h */,
@@ -338,16 +374,18 @@
 				93D000020CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.h */,
 				93D000030CEBC46E007705DB /* NSArray+CocoaDevUsersAdditions.m */,
 			);
-			name = Categories;
+			name = categories;
+			path = src/categories;
 			sourceTree = "<group>";
 		};
-		93D0FFA60CEBB866007705DB /* ModelControllers */ = {
+		93D0FFA60CEBB866007705DB /* modelcontroller */ = {
 			isa = PBXGroup;
 			children = (
 				93D0FFA70CEBB8C1007705DB /* PluginLibraryController.h */,
 				93D0FFA80CEBB8C1007705DB /* PluginLibraryController.m */,
 			);
-			name = ModelControllers;
+			name = modelcontroller;
+			path = src/modelcontroller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +395,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MailPluginManager" */;
 			buildPhases = (
+				9354C7FA114416A900F16F6D /* Copy Frameworks */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -368,7 +407,7 @@
 			name = MailPluginManager;
 			productInstallPath = "$(HOME)/Applications";
 			productName = MailPluginManager;
-			productReference = 8D1107320486CEB800E47090 /* MailPluginManager.app */;
+			productReference = 8D1107320486CEB800E47090 /* Mail Plugin Manager.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -437,6 +476,7 @@
 				93A24A440CF37A3300C7026C /* MailbundleUIUpdater.m in Sources */,
 				93A24BA90CF3A62A00C7026C /* FSEventsController.m in Sources */,
 				93C299FE0D0552930007FDCE /* MailAppOperations.m in Sources */,
+				932F32CC1144395A007290E2 /* PluginLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,15 +506,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MailPluginManager_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				GCC_PREFIX_HEADER = src/main/MailPluginManager_Prefix.pch;
+				INFOPLIST_FILE = resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = MailPluginManager;
+				PRODUCT_NAME = "Mail Plugin Manager";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -484,12 +525,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MailPluginManager_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				GCC_PREFIX_HEADER = src/main/MailPluginManager_Prefix.pch;
+				INFOPLIST_FILE = resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = MailPluginManager;
+				PRODUCT_NAME = "Mail Plugin Manager";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -497,7 +539,9 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "frameworks//**";
 				GCC_ENABLE_OBJC_GC = required;
+				GCC_MODEL_TUNING = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
@@ -513,7 +557,9 @@
 					ppc,
 					i386,
 				);
+				FRAMEWORK_SEARCH_PATHS = "frameworks//**";
 				GCC_ENABLE_OBJC_GC = required;
+				GCC_MODEL_TUNING = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
